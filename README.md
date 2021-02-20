@@ -33,6 +33,7 @@
 17. 通知公告：园区滚动消息的通知公告设置。
 18. 系统监控：在线用户，定时任务，操作日志和登录日志。
 19. 个人帐户：个人信息的设置。
+20. 驾驶舱：  多维数据图形报表的展示。
 
 
 ## 园区微信小程序
@@ -52,5 +53,29 @@
 ## 在线体验
 
 演示地址：待更新
+
+## 演示图
+
+![楼宇管理](https://images.gitee.com/uploads/images/2021/0220/162214_f335894e_2336929.png "楼宇管理.png")
+![房间管理](https://images.gitee.com/uploads/images/2021/0220/162256_97c1dedf_2336929.png "房间管理.png")
+![房间管理](https://images.gitee.com/uploads/images/2021/0220/162316_d0dcfe0f_2336929.png "房间管理-空间列表.png")
+![客户管理](https://images.gitee.com/uploads/images/2021/0220/162343_93e9cbdb_2336929.png "企业服务-客户管理.png")
+![客户管理](https://images.gitee.com/uploads/images/2021/0220/162428_27f74f46_2336929.png "企业服务-客户管理-编辑.png")
+![供应商管理](https://images.gitee.com/uploads/images/2021/0220/162402_4e62c143_2336929.png "企业服务-供应商管理.png")
+![服务管理](https://images.gitee.com/uploads/images/2021/0220/162508_9cde4862_2336929.png "企业服务-服务管理.png")
+![报修管理](https://images.gitee.com/uploads/images/2021/0220/162548_40a9af42_2336929.png "报修管理-工单管理.png")
+![意向合同](https://images.gitee.com/uploads/images/2021/0220/162635_f1b78d30_2336929.png "资产管理-意向合同.png")
+![合同管理](https://images.gitee.com/uploads/images/2021/0220/162651_c45fe3b1_2336929.png "资产管理-合同管理.png")
+![合同详情](https://images.gitee.com/uploads/images/2021/0220/162706_fe86ad60_2336929.png "资产管理-合同详情.png")
+![账单管理](https://images.gitee.com/uploads/images/2021/0220/162723_d1df3303_2336929.png "资产管理-账单管理.png")
+![账单报表](https://images.gitee.com/uploads/images/2021/0220/162741_79dfc0d6_2336929.png "资产管理-账单报表.png")
+![线索管理](https://images.gitee.com/uploads/images/2021/0220/162805_73e62f60_2336929.png "招商管理-线索管理.png")
+![线索分派](https://images.gitee.com/uploads/images/2021/0220/162820_7f703795_2336929.png "招商管理-线索分派.png")
+![活动管理](https://images.gitee.com/uploads/images/2021/0220/162842_e83f88c3_2336929.png "社群活动-活动管理.png")
+![图形数据](https://images.gitee.com/uploads/images/2021/0220/162858_9f322544_2336929.png "园区管理.png")
+![用户管理](https://images.gitee.com/uploads/images/2021/0220/162928_228978d0_2336929.png "用户管理.png")
+
+
+
 
   
