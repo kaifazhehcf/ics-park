@@ -94,6 +94,13 @@
 
 
 *微信小程序端
-
+![首页](https://images.gitee.com/uploads/images/2021/0220/164801_5702864e_2336929.jpeg "首页.jpg")
+![活动](https://images.gitee.com/uploads/images/2021/0220/164837_1d81f8d7_2336929.jpeg "活动.jpg")
+![商城](https://images.gitee.com/uploads/images/2021/0220/164852_800a124e_2336929.jpeg "商城.jpg")
+![我的](https://images.gitee.com/uploads/images/2021/0220/164908_d40d7978_2336929.jpeg "我的.jpg")
+![订单](https://images.gitee.com/uploads/images/2021/0220/164931_bbeb0bb5_2336929.jpeg "订单.jpg")
+![报修](https://images.gitee.com/uploads/images/2021/0220/164954_e96df9d9_2336929.jpeg "报修.jpg")
+![服务](https://images.gitee.com/uploads/images/2021/0220/165031_cc0e4efc_2336929.jpeg "服务.jpg")
+![公告](https://images.gitee.com/uploads/images/2021/0220/165049_8a226d2b_2336929.jpeg "公告.jpg")
 
   
