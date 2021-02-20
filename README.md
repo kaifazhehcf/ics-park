@@ -97,7 +97,7 @@
 <br/>
 
 
-<span margin="1000">
+<span style="margin: 100">
 <img src="https://images.gitee.com/uploads/images/2021/0220/164801_5702864e_2336929.jpeg" width="200" height="433" style="margin: 100" alt="首页"/>
 </span>
 <img src="https://images.gitee.com/uploads/images/2021/0220/164837_1d81f8d7_2336929.jpeg" width="200" height="433" style="margin: 100" alt="活动"/>
