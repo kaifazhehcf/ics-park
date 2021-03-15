@@ -4,7 +4,7 @@
 基于园区业务，深度挖掘流程与系统的关键结合点，发挥互联网的优势，系统主要实现园区的资产管理，企业服务及档案管理，园区的活动及商城的搭建。
 
 #### 软件架构
-* web前端采用Vue、ant design。![输入图片说明](https://images.gitee.com/uploads/images/2021/0315/091438_a33127c3_2336929.jpeg "微信图片_20210315091352.jpg")
+* web前端采用Vue、ant design。
 * 移动端采用微信小程序进行开发，简单易用无须安装。
 * 后端采用Spring Boot、Spring Security、Redis & Jwt。
 * 权限认证使用Jwt，支持多终端认证系统。
