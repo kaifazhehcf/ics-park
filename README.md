@@ -122,6 +122,6 @@
 
 QQ：1511002933
 微信：
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0315/091621_8150b3c2_2336929.jpeg "微信图片_20210315091352.jpg")
+<img src="https://images.gitee.com/uploads/images/2021/0315/091621_8150b3c2_2336929.jpeg" width="400" height="400"/>
 
   
