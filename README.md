@@ -123,6 +123,6 @@
 QQ：1511002933
 <br/>
 <div align=center>
-<img src="https://images.gitee.com/uploads/images/2021/0315/091621_8150b3c2_2336929.jpeg" width="200" height="265" alt="微信联系方式"/>
+<img src="https://images.gitee.com/uploads/images/2021/0315/091621_8150b3c2_2336929.jpeg" width="250" height="330" alt="微信联系方式"/>
 </div>
   
