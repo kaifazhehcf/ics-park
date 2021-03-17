@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ruoyi-generator" />
+        <module name="ruoyi-common-redis" />
+        <module name="ruoyi-system" />
+        <module name="ruoyi-quartz" />
+        <module name="ruoyi-common-core" />
+        <module name="ruoyi-web" />
+      </profile>
+    </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="ruoyi-common" target="1.8" />
+      <module name="ruoyi-common-core" target="1.8" />
+      <module name="ruoyi-common-redis" target="1.8" />
+      <module name="ruoyi-generator" target="1.8" />
       <module name="ruoyi-ics" target="1.8" />
+      <module name="ruoyi-quartz" target="1.8" />
+      <module name="ruoyi-system" target="1.8" />
+      <module name="ruoyi-web" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

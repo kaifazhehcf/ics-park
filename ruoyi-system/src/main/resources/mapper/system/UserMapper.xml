@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.UserMapper">
+
+	<resultMap type="com.ruoyi.system.domain.User" id="UserResult">
+		<id     property="userId"       column="user_id"      />
+		<result property="deptId"       column="dept_id"      />
+		<result property="loginName"    column="login_name"   />
+		<result property="userName"     column="user_name"    />
+		<result property="userType"    column="user_type"
+				typeHandler="com.ruoyi.common.handlers.MybatisEnumTypeHandler"/>
+		<result property="openid"       column="openid"       />
+		<result property="email"        column="email"        />
+		<result property="mobile"  		column="mobile"  	  />
+		<result property="gender"          column="gender"          />
+		<result property="post"         column="post"         />
+		<result property="avatar"       column="avatar"       />
+		<result property="password"     column="password"     />
+		<result property="salt"         column="salt"         />
+		<result property="status"       column="status"       />
+		<result property="delFlag"      column="del_flag"     />
+		<result property="loginIp"      column="login_ip"     />
+		<result property="loginDate"    column="login_date"   />
+		<result property="parkId"     	column="park_id"      />
+		<result property="customerId"	column="customer_id"  />
+		<result property="createBy"     column="create_by"    />
+		<result property="createTime"   column="create_time"  />
+		<result property="updateBy"     column="update_by"    />
+		<result property="updateTime"   column="update_time"  />
+		<result property="remark"       column="remark"       />
+		<association property="dept" column="dept_id" javaType="com.ruoyi.system.domain.Dept" resultMap="deptResult" />
+		<collection  property="roles"   javaType="java.util.List"        resultMap="RoleResult" />
+		<collection  property="roleIds"   javaType="java.util.List"        resultMap="RoleIdsResult" />
+	</resultMap>
+
+	<resultMap id="deptResult" type="com.ruoyi.system.domain.Dept">
+		<id     property="deptId"   column="dept_id"     />
+		<result property="parentId" column="parent_id"   />
+		<result property="deptName" column="dept_name"   />
+		<result property="orderNum" column="order_num"   />
+		<result property="status"   column="dept_status" />
+	</resultMap>
+
+	<resultMap id="RoleIdsResult" type="Long">
+		<id     property="roleId"       column="role_id"        />
+	</resultMap>
+
+	<resultMap id="RoleResult" type="com.ruoyi.system.domain.Role">
+		<id     property="roleId"       column="role_id"        />
+		<result property="roleName"     column="role_name"      />
+		<result property="roleKey"      column="role_key"       />
+		<result property="roleSort"     column="role_sort"      />
+		<result property="dataScope"     column="data_scope"    />
+		<result property="status"       column="role_status"    />
+	</resultMap>
+
+	<sql id="selectUserVo">
+        SELECT u.user_id,
+			   u.dept_id,
+			   u.login_name,
+			   u.user_name,
+			   u.user_type,
+			   u.openid,
+			   u.email,
+			   u.mobile,
+			   u.gender,
+			   u.post,
+			   u.avatar,
+			   u.password,
+			   u.salt,
+			   u.status,
+			   u.del_flag,
+			   u.login_ip,
+			   u.login_date,
+			   u.park_id,
+			   u.customer_id,
+			   u.create_time,
+			   u.remark,
+			   d.dept_id,
+			   d.parent_id,
+			   d.dept_name,
+			   d.order_num,
+			   d.status AS dept_status,
+			   r.role_id,
+			   r.role_name,
+			   r.role_key,
+			   r.role_sort,
+			   r.data_scope,
+			   r.status AS role_status
+		FROM   sys_user u
+			   LEFT JOIN sys_dept d
+					  ON u.dept_id = d.dept_id
+			   LEFT JOIN sys_user_role ur
+					  ON u.user_id = ur.user_id
+			   LEFT JOIN sys_role r
+					  ON r.role_id = ur.role_id
+    </sql>
+
+	<select id="selectUserList" parameterType="com.ruoyi.system.domain.User" resultMap="UserResult">
+		SELECT u.user_id,
+			   u.dept_id,
+			   u.login_name,
+			   u.user_name,
+			   u.user_type,
+			   u.openid,
+			   u.email,
+			   u.mobile,
+			   u.password,
+			   u.gender,
+			   u.post,
+			   u.avatar,
+			   u.salt,
+			   u.status,
+			   u.del_flag,
+			   u.login_ip,
+			   u.login_date,
+			   u.customer_id,
+			   u.park_id,
+			   u.create_by,
+			   u.create_time,
+			   u.remark,
+			   d.dept_name,
+			   NULL AS role_id
+		FROM sys_user u
+				 LEFT JOIN sys_dept d
+						   ON u.dept_id = d.dept_id
+		WHERE u.del_flag = '0'
+		<if test="loginName != null and loginName != ''">
+			AND u.login_name like concat('%', #{loginName}, '%')
+		</if>
+		<if test="userType != null">
+			AND u.user_type = #{userType.ordinal}
+		</if>
+		<if test="status != null and status != ''">
+			AND u.status = #{status}
+		</if>
+		<if test="mobile != null and mobile != ''">
+			AND u.mobile like concat('%', #{mobile}, '%')
+		</if>
+		<if test="params.beginTime != null and params.beginTime != ''"><!-- 开始时间检索 -->
+			AND date_format(u.create_time,'%y%m%d') &gt;= date_format(#{params.beginTime},'%y%m%d')
+		</if>
+		<if test="params.endTime != null and params.endTime != ''"><!-- 结束时间检索 -->
+			AND date_format(u.create_time,'%y%m%d') &lt;= date_format(#{params.endTime},'%y%m%d')
+		</if>
+		<if test="deptId != null and deptId != 0">
+			AND (u.dept_id = #{deptId} OR u.dept_id IN ( SELECT t.dept_id FROM sys_dept t WHERE FIND_IN_SET (#{deptId},ancestors) ))
+		</if>
+		<!-- 数据范围过滤 -->
+		${params.dataScope}
+
+	</select>
+
+	<select id="selectAllocatedList" parameterType="com.ruoyi.system.domain.User" resultMap="UserResult">
+		SELECT DISTINCT u.user_id,
+                u.dept_id,
+                u.login_name,
+                u.user_name,
+                u.email,
+                u.mobile,
+                u.status,
+                u.create_time
+		FROM sys_user u
+				 LEFT JOIN sys_dept d
+						   ON u.dept_id = d.dept_id
+				 LEFT JOIN sys_user_role ur
+						   ON u.user_id = ur.user_id
+				 LEFT JOIN sys_role r
+						   ON r.role_id = ur.role_id
+		WHERE u.del_flag = '0'
+		  AND r.role_id = #{roleId}
+		<if test="loginName != null and loginName != ''">
+			AND u.login_name like concat('%', #{loginName}, '%')
+		</if>
+		<if test="mobile != null and mobile != ''">
+			AND u.mobile like concat('%', #{mobile}, '%')
+		</if>
+		<!-- 数据范围过滤 -->
+		${params.dataScope}
+	</select>
+
+	<select id="selectUnallocatedList" parameterType="com.ruoyi.system.domain.User" resultMap="UserResult">
+	    SELECT DISTINCT u.user_id,
+                u.dept_id,
+                u.login_name,
+                u.user_name,
+                u.email,
+                u.mobile,
+                u.status,
+                u.create_time
+		FROM sys_user u
+				 LEFT JOIN sys_dept d ON u.dept_id = d.dept_id
+				 LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+				 LEFT JOIN sys_role r ON r.role_id = ur.role_id
+		WHERE u.del_flag = '0'
+		  AND (r.role_id != #{roleId} OR r.role_id IS NULL)
+		  AND u.user_id NOT IN (SELECT u.user_id
+								FROM sys_user u
+										 INNER JOIN sys_user_role ur ON u.user_id = ur.user_id AND ur.role_id = #{roleId})
+		<if test="loginName != null and loginName != ''">
+			AND u.login_name like concat('%', #{loginName}, '%')
+		</if>
+		<if test="mobile != null and mobile != ''">
+			AND u.mobile like concat('%', #{mobile}, '%')
+		</if>
+		<!-- 数据范围过滤 -->
+		${params.dataScope}
+	</select>
+
+	<select id="selectUserByLoginName" parameterType="String" resultMap="UserResult">
+	    <include refid="selectUserVo"/>
+		WHERE u.login_name = #{userName}
+	</select>
+
+	<select id="selectUserByOpenid" parameterType="String" resultMap="UserResult">
+		<include refid="selectUserVo"/>
+		WHERE u.openid = #{openid}
+	</select>
+
+	<select id="selectUserByMobile" parameterType="String" resultMap="UserResult">
+		<include refid="selectUserVo"/>
+		WHERE u.mobile = #{mobile}
+	</select>
+
+	<select id="selectUserByEmail" parameterType="String" resultMap="UserResult">
+	    <include refid="selectUserVo"/>
+		WHERE u.email = #{email}
+	</select>
+
+	<select id="checkLoginNameUnique" parameterType="String" resultType="int">
+		SELECT COUNT(1) FROM sys_user WHERE login_name=#{loginName}
+	</select>
+
+	<select id="checkPhoneUnique" parameterType="String" resultType="com.ruoyi.system.domain.User">
+		SELECT user_id AS userId, mobile FROM sys_user WHERE mobile=#{mobile}
+	</select>
+
+	<select id="checkEmailUnique" parameterType="String" resultType="com.ruoyi.system.domain.User">
+		SELECT user_id AS userId, email FROM sys_user WHERE email=#{email}
+	</select>
+
+	<select id="selectUserById" parameterType="Long" resultMap="UserResult">
+		<include refid="selectUserVo"/>
+		WHERE u.user_id = #{userId}
+	</select>
+
+	<select id="selectUserIdsHasRoles" parameterType="Long" resultType="Long">
+		SELECT DISTINCT u.user_id
+		FROM sys_user u
+				 LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+		WHERE ur.role_id IN
+		<foreach collection="array" item="roleId" open="(" separator="," close=")">
+			#{roleId}
+		</foreach>
+	</select>
+
+	<select id="selectUserIdsInDepts" parameterType="Long" resultType="Long">
+		SELECT DISTINCT u.user_id
+		FROM sys_user u
+				 LEFT JOIN sys_dept d ON u.dept_id = d.dept_id
+		WHERE d.dept_id IN
+		<foreach collection="array" item="deptId" open="(" separator="," close=")">
+			#{deptId}
+		</foreach>
+	</select>
+
+	<delete id="deleteUserById" parameterType="Long">
+ 		DELETE FROM sys_user WHERE user_id = #{userId}
+ 	</delete>
+
+ 	<delete id="deleteUserByIds" parameterType="Long">
+		UPDATE sys_user SET del_flag = '2' WHERE user_id IN
+ 		<foreach collection="array" item="userId" open="(" separator="," close=")">
+ 			#{userId}
+        </foreach>
+ 	</delete>
+
+ 	<insert id="insertUser" parameterType="com.ruoyi.system.domain.User" useGeneratedKeys="true" keyProperty="userId">
+ 		INSERT INTO sys_user(
+ 			<if test="userId != null and userId != 0">user_id,</if>
+ 			<if test="deptId != null and deptId != 0">dept_id,</if>
+ 			<if test="loginName != null and loginName != ''">login_name,</if>
+ 			<if test="userName != null and userName != ''">user_name,</if>
+			<if test="userType != null ">user_type,</if>
+			<if test="openid != null and openid != ''">openid,</if>
+			<if test="avatar != null ">avatar,</if>
+ 			<if test="email != null and email != ''">email,</if>
+ 			<if test="mobile != null and mobile != ''">mobile,</if>
+ 			<if test="gender != null and gender != ''">gender,</if>
+			<if test="post != null and post != ''">post,</if>
+ 			<if test="password != null and password != ''">password,</if>
+ 			<if test="salt != null and salt != ''">salt,</if>
+ 			<if test="status != null and status != ''">status,</if>
+ 			<if test="createBy != null and createBy != ''">create_by,</if>
+			<if test="customerId != null">customer_id,</if>
+			<if test="parkId != null">park_id,</if>
+ 			<if test="remark != null and remark != ''">remark,</if>
+ 			create_time
+ 		)VALUES(
+ 			<if test="userId != null and userId != ''">#{userId},</if>
+ 			<if test="deptId != null and deptId != ''">#{deptId},</if>
+ 			<if test="loginName != null and loginName != ''">#{loginName},</if>
+ 			<if test="userName != null and userName != ''">#{userName},</if>
+			<if test="userType != null ">#{userType, typeHandler=com.ruoyi.common.handlers.MybatisEnumTypeHandler},</if>
+			<if test="openid != null and openid != ''">#{openid},</if>
+			<if test="avatar != null and avatar != ''">#{avatar},</if>
+ 			<if test="email != null and email != ''">#{email},</if>
+ 			<if test="mobile != null and mobile != ''">#{mobile},</if>
+ 			<if test="gender != null and gender != ''">#{gender},</if>
+			<if test="post != null and post != ''">#{post},</if>
+ 			<if test="password != null and password != ''">#{password},</if>
+ 			<if test="salt != null and salt != ''">#{salt},</if>
+ 			<if test="status != null and status != ''">#{status},</if>
+ 			<if test="createBy != null and createBy != ''">#{createBy},</if>
+			<if test="customerId != null">#{customerId},</if>
+			<if test="parkId != null">#{parkId},</if>
+ 			<if test="remark != null and remark != ''">#{remark},</if>
+ 			sysdate()
+ 		)
+	</insert>
+
+	<update id="updateUser" parameterType="com.ruoyi.system.domain.User">
+		UPDATE sys_user
+		<set>
+			<if test="deptId != null and deptId != 0">dept_id = #{deptId},</if>
+			<if test="loginName != null and loginName != ''">login_name = #{loginName},</if>
+			<if test="userName != null and userName != ''">user_name = #{userName},</if>
+			<if test="userType != null ">user_type = #{userType, typeHandler=com.ruoyi.common.handlers.MybatisEnumTypeHandler},</if>
+			<if test="openid != null and openid != ''">openid = #{openid},</if>
+			<if test="email != null and email != ''">email = #{email},</if>
+			<if test="mobile != null and mobile != ''">mobile = #{mobile},</if>
+			<if test="gender != null and gender != ''">gender = #{gender},</if>
+			<if test="post != null and post != ''">post = #{post},</if>
+			<if test="avatar != null and avatar != ''">avatar = #{avatar},</if>
+			<if test="password != null and password != ''">password = #{password},</if>
+			<if test="salt != null and salt != ''">salt = #{salt},</if>
+			<if test="status != null and status != ''">status = #{status},</if>
+			<if test="loginIp != null and loginIp != ''">login_ip = #{loginIp},</if>
+			<if test="loginDate != null">login_date = #{loginDate},</if>
+			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+			<if test="customerId != null and customerId != 0">customer_id = #{customerId},</if>
+			<if test="parkId != null and parkId != 0">park_id = #{parkId},</if>
+			<if test="remark != null and remark != ''">remark = #{remark},</if>
+			update_time = sysdate()
+		</set>
+		WHERE user_id = #{userId}
+	</update>
+
+</mapper>

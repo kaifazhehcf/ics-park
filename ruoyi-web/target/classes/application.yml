@@ -1,0 +1,110 @@
+server:
+  port: 9227
+# 日志配置
+logging:
+  level:
+    com.ruoyi: debug
+    org.springframework: warn
+    com.github.binarywang.demo.wx.miniapp: debug
+    cn.binarywang.wx.miniapp: debug
+spring:
+  application:
+    name: ruoyi-ics
+  # 资源信息
+  messages:
+    # 国际化资源文件路径
+    basename: i18n/messages
+  devtools:
+    restart:
+      enabled: true
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      maxFileSize: 5MB  #单位必须大写MB或不写(即为B)
+      maxRequestSize: 10MB
+
+# 暴露监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+
+# MyBatis
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: com.ruoyi
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath*:mapper/**/*Mapper.xml
+  # 配置枚举类
+  configuration:
+    default-enum-type-handler: org.apache.ibatis.type.EnumTypeHandler
+
+mapper:
+  not-empty: true
+  identity: MYSQL
+
+# PageHelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+# 防止XSS攻击
+xss:
+  # 过滤开关
+  enabled: true
+  # 排除链接（多个用逗号分隔）
+  excludes: /system/notice/*
+  # 匹配链接
+  urlPatterns: /system/*,/monitor/*,/tool/*
+
+aj:
+  captcha:
+    water-mark: antdv.com
+    interference-options: 2
+
+# 启信宝
+qixin:
+  testAppKey:
+  testSecretKey:
+  testUrl:
+  appKey:
+  secretKey:
+  url:
+
+# 阿里短信
+aliyun:
+  sms:
+    domain:
+    accessKeyId:
+    accessKeySecret:
+    signName: 同天公司
+    templateCode:
+
+# 编号生产
+sn:
+  repair:
+    prefix: 'yyyyMMdd'
+    maxLo: 100
+# 百度api
+baidu:
+  ai:
+    app_id:
+    api_key:
+    secret_key:
+
+# 七牛云
+qiNiu:
+  accessKey:
+  secretKey:
+  bucketName: ics
+  imageUrl:

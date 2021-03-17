@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ruoyi.system.mapper.MenuMapper">
+
+	<resultMap type="com.ruoyi.system.domain.Menu" id="MenuResult">
+		<id property="menuId" column="menu_id" />
+		<result property="menuName" column="menu_name" />
+		<result property="parentName" column="parent_name" />
+		<result property="parentId" column="parent_id" />
+		<result property="orderNum" column="order_num" />
+		<result property="menuType" column="menu_type" />
+		<result property="target" column="target" />
+		<result property="menuKey" column="menu_key" />
+		<result property="component" column="component" />
+		<result property="visible" column="visible" />
+		<result property="perms" column="perms" />
+		<result property="icon" column="icon" />
+        <result property="path"    column="path"    />
+        <result property="redirect"    column="redirect"    />
+        <result property="hiddenChildren"    column="hidden_children"    />
+        <result property="hiddenHeader"    column="hidden_header"    />
+		<result property="parkId"      column="park_id"      />
+		<result property="createBy" column="create_by" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+		<result property="updateBy" column="update_by" />
+		<result property="remark" column="remark" />
+	</resultMap>
+
+	<sql id="selectMenuVo">
+		SELECT menu_id,
+			   menu_name,
+			   parent_id,
+			   target,
+			   order_num,
+			   menu_type,
+			   menu_key,
+			   component,
+			   visible,
+			   ifnull(perms, '') AS perms,
+			   icon,
+			   path,
+			   redirect,
+			   hidden_children,
+			   hidden_header,
+			   create_by,
+			   create_time
+		FROM sys_menu m
+	</sql>
+
+	<select id="selectMenusByUserId" parameterType="Long" resultMap="MenuResult">
+		SELECT DISTINCT m.menu_id,
+						m.parent_id,
+						m.menu_name,
+						m.perms,
+						m.menu_type,
+						m.menu_key,
+						m.component,
+						m.target,
+						m.icon,
+						m.path,
+						m.redirect,
+						m.hidden_children,
+						m.hidden_header,
+						m.order_num,
+						m.visible,
+						m.create_time
+		FROM sys_menu m
+				 LEFT JOIN sys_role_menu rm ON m.menu_id = rm.menu_id
+				 LEFT JOIN sys_user_role ur ON rm.role_id = ur.role_id
+				 LEFT JOIN sys_role ro ON ur.role_id = ro.role_id
+		WHERE ur.user_id = #{userId}
+		  AND m.menu_type IN ('M', 'C')
+		  AND ro.status = 0
+		  AND length(m.menu_key) > 0
+		ORDER BY m.order_num
+	</select>
+
+	<select id="selectMenuNormalAll" resultMap="MenuResult">
+		SELECT DISTINCT m.menu_id,
+						m.parent_id,
+						m.menu_name,
+						m.menu_key,
+						m.component,
+						m.target,
+						m.visible,
+						m.perms,
+						m.menu_type,
+						m.icon,
+						m.path,
+						m.redirect,
+						m.hidden_children,
+						m.hidden_header,
+						m.order_num,
+						m.create_time
+		FROM sys_menu m
+		WHERE m.menu_type IN ('M', 'C')
+		  AND length(m.menu_key) > 0
+		ORDER BY m.order_num
+	</select>
+
+	<select id="selectMenuAll" resultMap="MenuResult">
+		<include refid="selectMenuVo" />
+		<!-- 数据范围过滤 -->
+		${params.dataScope}
+		ORDER BY order_num
+	</select>
+
+	<select id="selectPermsByUserId" parameterType="Long" resultType="String">
+		SELECT DISTINCT m.perms
+		FROM sys_menu m
+				 LEFT JOIN sys_role_menu rm ON m.menu_id = rm.menu_id
+				 LEFT JOIN sys_user_role ur ON rm.role_id = ur.role_id
+		WHERE ur.user_id = #{userId}
+	</select>
+
+	<select id="selectMenuIdsByRoleId" parameterType="Long" resultMap="MenuResult">
+		SELECT DISTINCT m.menu_id, m.parent_id
+		FROM sys_menu m
+				 LEFT JOIN sys_role_menu rm ON m.menu_id = rm.menu_id
+		WHERE rm.role_id = #{roleId}
+	</select>
+
+
+	<select id="selectMenuTree" parameterType="Long" resultType="String">
+		SELECT concat(m.menu_id, ifnull(m.perms, '')) AS perms
+		FROM sys_menu m
+				 LEFT JOIN sys_role_menu rm ON m.menu_id = rm.menu_id
+		WHERE rm.role_id = #{roleId}
+		ORDER BY m.parent_id, m.order_num
+	</select>
+
+	<select id="selectMenuList" parameterType="com.ruoyi.system.domain.Menu" resultMap="MenuResult">
+		<include refid="selectMenuVo" />
+		<where>
+			<if test="menuKey != null and menuKey != ''">
+				AND menu_key=#{menuKey}
+			</if>
+			<if test="menuName != null and menuName != ''">
+				AND menu_name like concat('%', #{menuName}, '%')
+			</if>
+			<if test="visible != null and visible != ''">
+				AND visible = #{visible}
+			</if>
+			<!-- 数据范围过滤 -->
+			${params.dataScope}
+		</where>
+		ORDER BY order_num
+	</select>
+
+	<delete id="deleteMenuById" parameterType="Long">
+		DELETE FROM sys_menu WHERE menu_id = #{menuId} OR parent_id = #{menuId}
+	</delete>
+
+	<select id="selectMenuById" parameterType="Long" resultMap="MenuResult">
+		SELECT t.menu_id,
+			   t.parent_id,
+			   t.menu_name,
+			   t.order_num,
+			   t.target,
+			   t.menu_type,
+			   t.visible,
+			   t.perms,
+			   t.icon,
+			   t.path,
+			   t.redirect,
+			   t.hidden_children,
+			   t.hidden_header,
+			   t.remark,
+			   (SELECT menu_name FROM sys_menu WHERE menu_id = t.parent_id) parent_name
+		FROM sys_menu t
+		WHERE t.menu_id = #{menuId}
+	</select>
+
+	<select id="selectCountMenuByParentId" resultType="Integer">
+		SELECT count(1) FROM sys_menu WHERE parent_id = #{menuId}
+	</select>
+
+	<select id="checkMenuNameUnique" parameterType="com.ruoyi.system.domain.Menu" resultMap="MenuResult">
+		<include refid="selectMenuVo" />
+		WHERE menu_name=#{menuName} AND parent_id = #{parentId}
+	</select>
+
+	<update id="updateMenu" parameterType="com.ruoyi.system.domain.Menu">
+		UPDATE sys_menu
+		<set>
+			<if test="menuName != null and menuName != ''">menu_name = #{menuName},</if>
+			<if test="parentId != null and parentId != 0">parent_id = #{parentId},</if>
+			<if test="orderNum != null and orderNum != ''">order_num = #{orderNum},</if>
+			<if test="menuType != null and menuType != ''">menu_type = #{menuType},</if>
+			<if test="target != null">target = #{target},</if>
+			<if test="menuKey != null and menuKey != ''">menu_key = #{menuKey},</if>
+			<if test="component != null">component = #{component},</if>
+			<if test="visible != null">visible = #{visible},</if>
+			<if test="perms !=null">perms = #{perms},</if>
+			<if test="icon !=null and icon != ''">icon = #{icon},</if>
+			<if test="path !=null">path = #{path},</if>
+			<if test="redirect !=null">redirect = #{redirect},</if>
+			<if test="hiddenChildren !=null">hidden_children = #{hiddenChildren},</if>
+			<if test="hiddenHeader !=null">hidden_header = #{hiddenHeader},</if>
+			<if test="remark != null and remark != ''">remark = #{remark},</if>
+			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+			update_time = sysdate()
+		</set>
+		WHERE menu_id = #{menuId}
+	</update>
+
+	<insert id="insertMenu" parameterType="com.ruoyi.system.domain.Menu">
+		INSERT INTO sys_menu(
+		<if test="menuId != null and menuId != 0">menu_id,</if>
+		<if test="parentId != null and parentId != 0">parent_id,</if>
+		<if test="menuName != null and menuName != ''">menu_name,</if>
+		<if test="orderNum != null and orderNum != ''">order_num,</if>
+		<if test="menuType != null and menuType != ''">menu_type,</if>
+		<if test="target != null and target != ''">target,</if>
+		<if test="menuKey != null and menuKey != ''">menu_key,</if>
+		<if test="component != null and component != ''">component ,</if>
+		<if test="visible != null">visible,</if>
+		<if test="perms !=null and perms != ''">perms,</if>
+		<if test="icon != null and icon != ''">icon,</if>
+		<if test="path !=null and path != ''">path,</if>
+		<if test="redirect !=null and redirect != ''">redirect,</if>
+		<if test="hiddenChildren !=null">hidden_children,</if>
+		<if test="hiddenHeader !=null">hidden_header,</if>
+		<if test="remark != null and remark != ''">remark,</if>
+		<if test="parkId != null">park_id,</if>
+		<if test="createBy != null and createBy != ''">create_by,</if>
+		create_time
+		)VALUES(
+		<if test="menuId != null and menuId != 0">#{menuId},</if>
+		<if test="parentId != null and parentId != 0">#{parentId},</if>
+		<if test="menuName != null and menuName != ''">#{menuName},</if>
+		<if test="orderNum != null and orderNum != ''">#{orderNum},</if>
+		<if test="menuType != null and menuType != ''">#{menuType},</if>
+		<if test="target != null and target != ''">#{target},</if>
+		<if test="menuKey != null and menuKey != ''">#{menuKey},</if>
+		<if test="component != null and component != ''">#{component},</if>
+		<if test="visible != null">#{visible},</if>
+		<if test="perms !=null and perms != ''">#{perms},</if>
+		<if test="icon != null and icon != ''">#{icon},</if>
+		<if test="path !=null and path != ''">#{path},</if>
+		<if test="redirect !=null and redirect != ''">#{redirect},</if>
+		<if test="hiddenChildren !=null">#{hiddenChildren},</if>
+		<if test="hiddenHeader !=null">#{hiddenHeader},</if>
+		<if test="remark != null and remark != ''">#{remark},</if>
+		<if test="parkId != null">#{parkId},</if>
+		<if test="createBy != null and createBy != ''">#{createBy},</if>
+		sysdate()
+		)
+	</insert>
+
+</mapper> 

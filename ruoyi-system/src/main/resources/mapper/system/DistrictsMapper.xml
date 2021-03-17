@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.DistrictsMapper">
+    
+    <resultMap type="Districts" id="DistrictsResult">
+        <result property="id"    column="id"    />
+        <result property="pid"    column="pid"    />
+        <result property="deep"    column="deep"    />
+        <result property="name"    column="name"    />
+        <result property="pname"    column="pname"    />
+        <result property="pinyin"    column="pinyin"    />
+        <result property="pinyinShor"    column="pinyin_shor"    />
+        <result property="extName"    column="ext_name"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="operator"    column="operator"    />
+    </resultMap>
+	
+	<sql id="selectDistrictsVo">
+        SELECT d.id,
+               d.pid,
+               d.deep,
+               d.name,
+               d.pinyin,
+               d.pinyin_shor,
+               d.ext_name,
+               d.create_time,
+               d.update_time,
+               d.operator,
+               p.name AS pname
+        FROM sys_districts d
+                 LEFT JOIN sys_districts p ON d.pid = p.id
+    </sql>
+	
+    <select id="selectDistrictsList" parameterType="Districts" resultMap="DistrictsResult">
+        <include refid="selectDistrictsVo"/>
+        <where>  
+            <if test="id != null "> AND d.id = #{id}</if>
+             <if test="pid != null "> AND d.pid = #{pid}</if>
+             <if test="deep != null "> AND d.deep = #{deep}</if>
+             <if test="name != null  and name != '' "> AND d.name LIKE concat('%',#{name},'%')</if>
+             <if test="pinyin != null  and pinyin != '' "> AND d.pinyin = #{pinyin}</if>
+             <if test="pinyinShor != null  and pinyinShor != '' "> AND d.pinyin_shor = #{pinyinShor}</if>
+             <if test="createTime != null "> AND d.create_time &gt;= #{createTime}</if>
+             <if test="updateTime != null "> AND d.update_time &lt;= #{updateTime}</if>
+             <if test="operator != null  and operator != '' "> AND operator = #{operator}</if>
+         </where>
+    </select>
+    
+    <select id="selectDistrictsById" parameterType="Integer" resultMap="DistrictsResult">
+        <include refid="selectDistrictsVo"/>
+        WHERE d.id = #{id}
+    </select>
+
+    <select id="selectDistrictsVOList" resultType="com.ruoyi.system.domain.vo.DistrictsVO">
+        SELECT d.id AS value,
+               d.pid,
+               d.name AS label
+        FROM sys_districts d
+    </select>
+
+    <select id="selectDistrictsByIds"  resultMap="DistrictsResult" parameterType="list">
+        <include refid="selectDistrictsVo"/>
+         WHERE d.id IN
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <insert id="insertDistricts" parameterType="Districts">
+        INSERT INTO sys_districts
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="pid != null  ">pid,</if>
+			<if test="deep != null  ">deep,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="pinyin != null  and pinyin != ''  ">pinyin,</if>
+			<if test="pinyinShor != null  and pinyinShor != ''  ">pinyin_shor,</if>
+			<if test="extName != null  and extName != ''  ">ext_name,</if>
+			<if test="createTime != null  ">create_time,</if>
+			<if test="updateTime != null  ">update_time,</if>
+			<if test="operator != null  and operator != ''  ">operator,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="pid != null  ">#{pid},</if>
+			<if test="deep != null  ">#{deep},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="pinyin != null  and pinyin != ''  ">#{pinyin},</if>
+			<if test="pinyinShor != null  and pinyinShor != ''  ">#{pinyinShor},</if>
+			<if test="extName != null  and extName != ''  ">#{extName},</if>
+			<if test="createTime != null  ">#{createTime},</if>
+			<if test="updateTime != null  ">#{updateTime},</if>
+			<if test="operator != null  and operator != ''  ">#{operator},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateDistricts" parameterType="Districts">
+        UPDATE sys_districts
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="pid != null  ">pid = #{pid},</if>
+            <if test="deep != null  ">deep = #{deep},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="pinyin != null  and pinyin != ''  ">pinyin = #{pinyin},</if>
+            <if test="pinyinShor != null  and pinyinShor != ''  ">pinyin_shor = #{pinyinShor},</if>
+            <if test="extName != null  and extName != ''  ">ext_name = #{extName},</if>
+            <if test="createTime != null  ">create_time = #{createTime},</if>
+            <if test="updateTime != null  ">update_time = #{updateTime},</if>
+            <if test="operator != null  and operator != ''  ">operator = #{operator},</if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+	<delete id="deleteDistrictsById" parameterType="Integer">
+        DELETE FROM sys_districts WHERE id = #{id}
+    </delete>
+	
+    <delete id="deleteDistrictsByIds" parameterType="String">
+        DELETE FROM sys_districts WHERE id IN
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
