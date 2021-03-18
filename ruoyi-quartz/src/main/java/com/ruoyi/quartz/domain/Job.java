@@ -1,10 +1,7 @@
 package com.ruoyi.quartz.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ruoyi.common.constant.ScheduleConstants;
 import com.ruoyi.common.core.domain.BaseEntity;
-import com.ruoyi.common.utils.StringUtils;
-import com.ruoyi.quartz.util.CronUtils;
 import lombok.Data;
 
 import javax.persistence.GeneratedValue;
@@ -13,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
 
 /**
  * 定时任务调度表 sys_job

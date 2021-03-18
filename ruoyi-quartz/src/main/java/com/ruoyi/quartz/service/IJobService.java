@@ -3,7 +3,6 @@ package com.ruoyi.quartz.service;
 import com.ruoyi.common.core.service.IBaseService;
 import com.ruoyi.common.exception.job.TaskException;
 import com.ruoyi.quartz.domain.Job;
-import com.ruoyi.quartz.domain.JobLog;
 import org.quartz.SchedulerException;
 
 import java.util.List;
