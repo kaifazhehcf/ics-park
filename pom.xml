@@ -362,6 +362,7 @@
         </repository>
     </repositories>
 
+
     <pluginRepositories>
         <pluginRepository>
             <id>public</id>
