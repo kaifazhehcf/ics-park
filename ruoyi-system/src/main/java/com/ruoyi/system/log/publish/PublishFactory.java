@@ -1,7 +1,6 @@
 package com.ruoyi.system.log.publish;
 
 import com.ruoyi.common.constant.Constants;
-import com.ruoyi.common.utils.AddressUtils;
 import com.ruoyi.common.utils.IpUtils;
 import com.ruoyi.common.utils.ServletUtils;
 import com.ruoyi.common.utils.spring.SpringContextHolder;
