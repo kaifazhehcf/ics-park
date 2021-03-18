@@ -23,7 +23,7 @@ export default {
   menu: {
     locale: true
   },
-  title: '同创 ICS',
+  title: '同创 ICS',  //模板仅供参考,如需完整版请扫描GIt上的微信二维码
   pwa: false,
   iconfontUrl: '',
   production: process.env.NODE_ENV === 'production' && process.env.VUE_APP_PREVIEW !== 'true'
