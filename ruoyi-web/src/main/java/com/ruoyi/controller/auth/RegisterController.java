@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * 用户注册
  *
- * @author jack
+ * @author LeiXuan
  */
 @RestController
 @RequestMapping("/user/register")
