@@ -87,7 +87,7 @@ aliyun:
     domain:
     accessKeyId:
     accessKeySecret:
-    signName: 同天公司
+    signName:
     templateCode:
 
 # 编号生产
@@ -106,5 +106,5 @@ baidu:
 qiNiu:
   accessKey:
   secretKey:
-  bucketName: ics
+  bucketName:
   imageUrl:
