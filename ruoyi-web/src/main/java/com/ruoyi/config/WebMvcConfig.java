@@ -33,6 +33,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler(Constants.RESOURCE_PREFIX + "/**").addResourceLocations("file:" + dfsConfig.getPath() + "/");
     }
 
+
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(loginUserHandlerResolver);
