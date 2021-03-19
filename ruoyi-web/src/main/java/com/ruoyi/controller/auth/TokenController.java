@@ -34,6 +34,11 @@ public class TokenController {
     @Autowired
     private ISmsService smsService;
 
+    /**
+     * 登录
+     * @param form
+     * @return
+     */
     @PostMapping("login/slide")
     public R loginSilde(@RequestBody LoginForm form) {
         ResponseModel response = captchaService.verification(form.getCaptchaVO());
