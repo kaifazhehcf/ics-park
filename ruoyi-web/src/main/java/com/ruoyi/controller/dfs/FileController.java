@@ -38,7 +38,6 @@ public class FileController {
     private IFileCloudService fileCloudService;
 
 
-
     /**
      * 通用下载请求
      *
@@ -78,9 +77,9 @@ public class FileController {
             String active = SpringContextHolder.getActiveProfile();
             String url = "";
             if ("dev".equals(active)) {
-                 url = dfsConfig.getDomain() + fileName;
-            }else if("prod".equals(active)){
-                 url = dfsConfig.getDomain()+"/api/"+ fileName;
+                url = dfsConfig.getDomain() + fileName;
+            } else if ("prod".equals(active)) {
+                url = dfsConfig.getDomain() + "/api/" + fileName;
             }
             return R.ok().put("fileName", fileName).put("url", url);
         } catch (Exception e) {
@@ -99,14 +98,14 @@ public class FileController {
             String filePath = dfsConfig.getPath();
             List<String> urls = Lists.newArrayList();
             // 上传并返回新文件名称
-            for(MultipartFile file : files){
+            for (MultipartFile file : files) {
                 String fileName = FileUploadUtils.upload(filePath, file);
                 String active = SpringContextHolder.getActiveProfile();
                 String url = "";
                 if ("dev".equals(active)) {
                     url = dfsConfig.getDomain() + fileName;
-                }else if("prod".equals(active)){
-                    url = dfsConfig.getDomain()+"/api/"+ fileName;
+                } else if ("prod".equals(active)) {
+                    url = dfsConfig.getDomain() + "/api/" + fileName;
                 }
                 urls.add(url);
             }
