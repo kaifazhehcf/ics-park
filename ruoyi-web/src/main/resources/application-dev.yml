@@ -15,14 +15,14 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
     druid:
-      # 主库数据源
+      # 主库数据源   测试环境
       master:
         url: jdbc:mysql://localhost:3306/ry_ics?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
         username: root
         password: root
       # 从库数据源
       slave:
-        #从数据源开关/默认关闭
+        #从数据源开关/默认关闭      测试环境
         enabled: false
         url: jdbc:mysql://localhost:3306/ry_ics?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
         username: root
