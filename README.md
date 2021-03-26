@@ -123,7 +123,7 @@
 ## 联系方式
 
 <br/>
-## 如有商务合作请假微信
+如有商务合作请添加微信
 <div align=center>
 <img src="https://images.gitee.com/uploads/images/2021/0318/115830_22776eb2_7716485.png" width="250" height="250" alt="微信联系方式"/>
 </div>
