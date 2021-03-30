@@ -20,7 +20,7 @@ Software architecture description
 2.  xxxx
 3.  xxxx
 
-#### Contribution
+###### Contribution
 
 1.  Fork the repository
 2.  Create Feat_xxx branch
