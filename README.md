@@ -106,9 +106,6 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <img src="https://images.gitee.com/uploads/images/2021/0220/164837_1d81f8d7_2336929.jpeg" width="200" height="433" alt="活动"/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<img src="https://images.gitee.com/uploads/images/2021/0220/164852_800a124e_2336929.jpeg" width="200" height="433" alt="商城"/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<img src="https://images.gitee.com/uploads/images/2021/0220/164908_d40d7978_2336929.jpeg" width="200" height="433" alt="我的"/>
 </div>
 <br/>
 <hr>
