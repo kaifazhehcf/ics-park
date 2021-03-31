@@ -52,7 +52,7 @@
 
 ### 在线体验
 
-演示地址：demo.totinlink.com
+演示地址：http://demo.totinlink.com/
 
 用户名： test2 
 
