@@ -54,9 +54,9 @@
 
 演示地址：http://demo.totinlink.com/
 
-用户名： test2 
+用户名： admin
 
-密 码：  123456
+密 码：  admin123
 
 ## 演示图
 
