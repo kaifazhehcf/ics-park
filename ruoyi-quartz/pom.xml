@@ -29,6 +29,11 @@
             <artifactId>ruoyi-system</artifactId>
         </dependency>
 
+        <!-- 园区业务模块-->
+        <dependency>
+            <groupId>com.ruoyi</groupId>
+            <artifactId>ruoyi-business</artifactId>
+        </dependency>
 
 
     </dependencies>
