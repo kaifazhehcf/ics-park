@@ -52,12 +52,16 @@
 
 ### 商业版体验地址
 
-演示地址：http://demo.totinlink.com/
+商业版演示地址：http://demo.totinlink.com/
 
-用户名： admin
+用户名：admin  密码：admin123
 
-密 码：  admin123
+如有商务合作请添加微信
+<div align=center>
+<img src="https://images.gitee.com/uploads/images/2021/0318/115830_22776eb2_7716485.png" width="250" height="250" alt="微信联系方式"/>
+</div>
 
+开源版本没有演示地址（直接拉代码）
 ## 演示图
 
 *PC端后台管理
