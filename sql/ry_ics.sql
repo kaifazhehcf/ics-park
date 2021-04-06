@@ -12,32 +12,35 @@ MySQL - 8.0.23 : Database - ry_ics
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`ry_ics` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE
+DATABASE /*!32312 IF NOT EXISTS*/`ry_ics` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
 
-USE `ry_ics`;
+USE
+`ry_ics`;
 
 /*Table structure for table `gen_table` */
 
 DROP TABLE IF EXISTS `gen_table`;
 
-CREATE TABLE `gen_table` (
-  `table_id` bigint NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `table_name` varchar(200) DEFAULT '' COMMENT '表名称',
-  `table_comment` varchar(500) DEFAULT '' COMMENT '表描述',
-  `class_name` varchar(100) DEFAULT '' COMMENT '实体类名称',
-  `tpl_category` varchar(200) DEFAULT 'crud' COMMENT '使用的模板（crud单表操作 tree树表操作）',
-  `package_name` varchar(100) DEFAULT NULL COMMENT '生成包路径',
-  `module_name` varchar(30) DEFAULT NULL COMMENT '生成模块名',
-  `business_name` varchar(30) DEFAULT NULL COMMENT '生成业务名',
-  `function_name` varchar(50) DEFAULT NULL COMMENT '生成功能名',
-  `function_author` varchar(50) DEFAULT NULL COMMENT '生成功能作者',
-  `options` varchar(1000) DEFAULT NULL COMMENT '其它生成选项',
-  `create_by` varchar(64) DEFAULT '' COMMENT '创建者',
-  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) DEFAULT '' COMMENT '更新者',
-  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-  `remark` varchar(500) DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`table_id`) USING BTREE
+CREATE TABLE `gen_table`
+(
+    `table_id`        bigint NOT NULL AUTO_INCREMENT COMMENT '编号',
+    `table_name`      varchar(200)  DEFAULT '' COMMENT '表名称',
+    `table_comment`   varchar(500)  DEFAULT '' COMMENT '表描述',
+    `class_name`      varchar(100)  DEFAULT '' COMMENT '实体类名称',
+    `tpl_category`    varchar(200)  DEFAULT 'crud' COMMENT '使用的模板（crud单表操作 tree树表操作）',
+    `package_name`    varchar(100)  DEFAULT NULL COMMENT '生成包路径',
+    `module_name`     varchar(30)   DEFAULT NULL COMMENT '生成模块名',
+    `business_name`   varchar(30)   DEFAULT NULL COMMENT '生成业务名',
+    `function_name`   varchar(50)   DEFAULT NULL COMMENT '生成功能名',
+    `function_author` varchar(50)   DEFAULT NULL COMMENT '生成功能作者',
+    `options`         varchar(1000) DEFAULT NULL COMMENT '其它生成选项',
+    `create_by`       varchar(64)   DEFAULT '' COMMENT '创建者',
+    `create_time`     datetime      DEFAULT NULL COMMENT '创建时间',
+    `update_by`       varchar(64)   DEFAULT '' COMMENT '更新者',
+    `update_time`     datetime      DEFAULT NULL COMMENT '更新时间',
+    `remark`          varchar(500)  DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`table_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='代码生成业务表';
 
 /*Data for the table `gen_table` */
@@ -46,45 +49,165 @@ CREATE TABLE `gen_table` (
 
 DROP TABLE IF EXISTS `gen_table_column`;
 
-CREATE TABLE `gen_table_column` (
-  `column_id` bigint NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `table_id` varchar(64) DEFAULT NULL COMMENT '归属表编号',
-  `column_name` varchar(200) DEFAULT NULL COMMENT '列名称',
-  `column_comment` varchar(500) DEFAULT NULL COMMENT '列描述',
-  `column_type` varchar(100) DEFAULT NULL COMMENT '列类型',
-  `java_type` varchar(500) DEFAULT NULL COMMENT 'JAVA类型',
-  `java_field` varchar(200) DEFAULT NULL COMMENT 'JAVA字段名',
-  `is_pk` char(1) DEFAULT NULL COMMENT '是否主键（1是）',
-  `is_increment` char(1) DEFAULT NULL COMMENT '是否自增（1是）',
-  `is_required` char(1) DEFAULT NULL COMMENT '是否必填（1是）',
-  `is_insert` char(1) DEFAULT NULL COMMENT '是否为插入字段（1是）',
-  `is_edit` char(1) DEFAULT NULL COMMENT '是否编辑字段（1是）',
-  `is_list` char(1) DEFAULT NULL COMMENT '是否列表字段（1是）',
-  `is_query` char(1) DEFAULT NULL COMMENT '是否查询字段（1是）',
-  `query_type` varchar(200) DEFAULT '=' COMMENT '查询方式（等于、不等于、大于、小于、范围）',
-  `html_type` varchar(200) DEFAULT NULL COMMENT '显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）',
-  `dict_type` varchar(200) DEFAULT '' COMMENT '字典类型',
-  `sort` int DEFAULT NULL COMMENT '排序',
-  `create_by` varchar(64) DEFAULT '' COMMENT '创建者',
-  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-  `update_by` varchar(64) DEFAULT '' COMMENT '更新者',
-  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`column_id`) USING BTREE
+CREATE TABLE `gen_table_column`
+(
+    `column_id`      bigint NOT NULL AUTO_INCREMENT COMMENT '编号',
+    `table_id`       varchar(64)  DEFAULT NULL COMMENT '归属表编号',
+    `column_name`    varchar(200) DEFAULT NULL COMMENT '列名称',
+    `column_comment` varchar(500) DEFAULT NULL COMMENT '列描述',
+    `column_type`    varchar(100) DEFAULT NULL COMMENT '列类型',
+    `java_type`      varchar(500) DEFAULT NULL COMMENT 'JAVA类型',
+    `java_field`     varchar(200) DEFAULT NULL COMMENT 'JAVA字段名',
+    `is_pk`          char(1)      DEFAULT NULL COMMENT '是否主键（1是）',
+    `is_increment`   char(1)      DEFAULT NULL COMMENT '是否自增（1是）',
+    `is_required`    char(1)      DEFAULT NULL COMMENT '是否必填（1是）',
+    `is_insert`      char(1)      DEFAULT NULL COMMENT '是否为插入字段（1是）',
+    `is_edit`        char(1)      DEFAULT NULL COMMENT '是否编辑字段（1是）',
+    `is_list`        char(1)      DEFAULT NULL COMMENT '是否列表字段（1是）',
+    `is_query`       char(1)      DEFAULT NULL COMMENT '是否查询字段（1是）',
+    `query_type`     varchar(200) DEFAULT '=' COMMENT '查询方式（等于、不等于、大于、小于、范围）',
+    `html_type`      varchar(200) DEFAULT NULL COMMENT '显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）',
+    `dict_type`      varchar(200) DEFAULT '' COMMENT '字典类型',
+    `sort`           int          DEFAULT NULL COMMENT '排序',
+    `create_by`      varchar(64)  DEFAULT '' COMMENT '创建者',
+    `create_time`    datetime     DEFAULT NULL COMMENT '创建时间',
+    `update_by`      varchar(64)  DEFAULT '' COMMENT '更新者',
+    `update_time`    datetime     DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`column_id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=1635 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci ROW_FORMAT=DYNAMIC COMMENT='代码生成业务表字段';
 
 /*Data for the table `gen_table_column` */
+
+/*Table structure for table `ics_dj` */
+
+DROP TABLE IF EXISTS `ics_dj`;
+
+CREATE TABLE `ics_dj`
+(
+    `id`              int         NOT NULL AUTO_INCREMENT,
+    `dj_name`         varchar(255)         DEFAULT NULL COMMENT '党建名称',
+    `content`         text COMMENT '上传详情',
+    `is_marketable`   bit(1)               DEFAULT NULL COMMENT '是否上架',
+    `marketable_time` datetime             DEFAULT NULL COMMENT '上架时间',
+    `del_flag`        char(1)              DEFAULT '0' COMMENT '删除标志（0代表存在 1代表删除）',
+    `park_id`         bigint               DEFAULT NULL COMMENT '园区id',
+    `create_by`       varchar(64) NOT NULL DEFAULT '' COMMENT '创建人',
+    `update_by`       varchar(64)          DEFAULT '' COMMENT '更新者',
+    `create_time`     datetime             DEFAULT NULL COMMENT '创建时间',
+    `update_time`     datetime             DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='党建管理';
+
+/*Data for the table `ics_dj` */
+
+/*Table structure for table `ics_dj_banner` */
+
+DROP TABLE IF EXISTS `ics_dj_banner`;
+
+CREATE TABLE `ics_dj_banner`
+(
+    `id`              int         NOT NULL AUTO_INCREMENT,
+    `banner_name`     varchar(255)         DEFAULT NULL COMMENT 'banner名称',
+    `banner_desc`     text COMMENT 'banner简介（可选）',
+    `banner_img`      varchar(255)         DEFAULT NULL COMMENT '上传banner图标',
+    `url`             varchar(255)         DEFAULT NULL,
+    `hits`            int                  DEFAULT NULL COMMENT '点击次数',
+    `is_marketable`   bit(1)               DEFAULT NULL COMMENT '是否上架',
+    `marketable_time` datetime             DEFAULT NULL COMMENT '上架时间',
+    `is_top`          int                  DEFAULT NULL COMMENT '是否置顶',
+    `del_flag`        char(1)              DEFAULT '0' COMMENT '删除标志（0代表存在 1代表删除）',
+    `park_id`         bigint               DEFAULT NULL COMMENT '园区id',
+    `create_by`       varchar(64) NOT NULL DEFAULT '' COMMENT '创建人',
+    `update_by`       varchar(64)          DEFAULT '' COMMENT '更新者',
+    `create_time`     datetime             DEFAULT NULL COMMENT '创建时间',
+    `update_time`     datetime             DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='党建banner';
+
+/*Data for the table `ics_dj_banner` */
+
+/*Table structure for table `ics_expense_settings` */
+
+DROP TABLE IF EXISTS `ics_expense_settings`;
+
+CREATE TABLE `ics_expense_settings`
+(
+    `id`          int NOT NULL AUTO_INCREMENT,
+    `name`        varchar(255)   DEFAULT NULL COMMENT '费项名称',
+    `type`        varchar(32)    DEFAULT NULL COMMENT '费项类型（0-系统费项，1-周期性费项，2-一次性费项）',
+    `units_code`  varchar(32)    DEFAULT NULL COMMENT '计量单位（度，平方米，吨，立方米，千克）',
+    `tax_fee`     decimal(20, 4) DEFAULT NULL COMMENT '税率%',
+    `memo`        varchar(255)   DEFAULT NULL COMMENT '备注',
+    `is_enabled`  bit(1)         DEFAULT NULL COMMENT '是否启用',
+    `park_id`     bigint         DEFAULT NULL COMMENT '园区id',
+    `create_by`   varchar(64)    DEFAULT '' COMMENT '创建人',
+    `update_by`   varchar(64)    DEFAULT '' COMMENT '更新者',
+    `create_time` datetime       DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime       DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='费项配置';
+
+/*Data for the table `ics_expense_settings` */
+
+/*Table structure for table `ics_policy` */
+
+DROP TABLE IF EXISTS `ics_policy`;
+
+CREATE TABLE `ics_policy`
+(
+    `id`              int         NOT NULL AUTO_INCREMENT COMMENT '政策ID',
+    `name`            varchar(255)         DEFAULT NULL COMMENT '政策名称',
+    `content`         longtext COMMENT '上传详情',
+    `is_marketable`   bit(1)               DEFAULT NULL COMMENT '是否上架',
+    `del_flag`        char(1)              DEFAULT '0' COMMENT '删除标志（0代表存在 1代表删除）',
+    `park_id`         bigint               DEFAULT NULL COMMENT '园区id',
+    `marketable_time` datetime             DEFAULT NULL COMMENT '上架时间',
+    `create_by`       varchar(64) NOT NULL DEFAULT '' COMMENT '创建人',
+    `update_by`       varchar(64)          DEFAULT '' COMMENT '更新者',
+    `create_time`     datetime             DEFAULT NULL COMMENT '创建时间',
+    `update_time`     datetime             DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='政策管理';
+
+/*Data for the table `ics_policy` */
+
+/*Table structure for table `ics_policy_banner` */
+
+DROP TABLE IF EXISTS `ics_policy_banner`;
+
+CREATE TABLE `ics_policy_banner`
+(
+    `id`              int         NOT NULL AUTO_INCREMENT COMMENT 'ID',
+    `name`            varchar(255)         DEFAULT NULL COMMENT 'banner名称',
+    `banner_desc`     text COMMENT 'banner简介（可选）',
+    `banner_img`      varchar(255)         DEFAULT NULL COMMENT 'banner图路径',
+    `hits`            int                  DEFAULT NULL COMMENT '点击次数',
+    `is_marketable`   bit(1)               DEFAULT NULL COMMENT '是否上架',
+    `marketable_time` datetime             DEFAULT NULL COMMENT '上架时间',
+    `del_flag`        char(1)              DEFAULT '0' COMMENT '删除标志（0代表存在 1代表删除）',
+    `uri`             varchar(255)         DEFAULT NULL COMMENT '落地页URI',
+    `park_id`         bigint               DEFAULT NULL COMMENT '园区id',
+    `create_by`       varchar(64) NOT NULL DEFAULT '' COMMENT '创建人',
+    `update_by`       varchar(64)          DEFAULT '' COMMENT '更新者',
+    `create_time`     datetime             DEFAULT NULL COMMENT '创建时间',
+    `update_time`     datetime             DEFAULT NULL COMMENT '更新时间',
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='政策banner';
+
+/*Data for the table `ics_policy_banner` */
 
 /*Table structure for table `qrtz_blob_triggers` */
 
 DROP TABLE IF EXISTS `qrtz_blob_triggers`;
 
-CREATE TABLE `qrtz_blob_triggers` (
-  `sched_name` varchar(120) NOT NULL,
-  `trigger_name` varchar(200) NOT NULL,
-  `trigger_group` varchar(200) NOT NULL,
-  `blob_data` blob,
-  PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
-  CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`)
+CREATE TABLE `qrtz_blob_triggers`
+(
+    `sched_name`    varchar(120) NOT NULL,
+    `trigger_name`  varchar(200) NOT NULL,
+    `trigger_group` varchar(200) NOT NULL,
+    `blob_data`     blob,
+    PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`),
+    CONSTRAINT `qrtz_blob_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `qrtz_blob_triggers` */
@@ -93,11 +216,12 @@ CREATE TABLE `qrtz_blob_triggers` (
 
 DROP TABLE IF EXISTS `qrtz_calendars`;
 
-CREATE TABLE `qrtz_calendars` (
-  `sched_name` varchar(120) NOT NULL,
-  `calendar_name` varchar(200) NOT NULL,
-  `calendar` blob NOT NULL,
-  PRIMARY KEY (`sched_name`,`calendar_name`)
+CREATE TABLE `qrtz_calendars`
+(
+    `sched_name`    varchar(120) NOT NULL,
+    `calendar_name` varchar(200) NOT NULL,
+    `calendar`      blob         NOT NULL,
+    PRIMARY KEY (`sched_name`, `calendar_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `qrtz_calendars` */
@@ -106,51 +230,53 @@ CREATE TABLE `qrtz_calendars` (
 
 DROP TABLE IF EXISTS `qrtz_cron_triggers`;
 
-CREATE TABLE `qrtz_cron_triggers` (
-  `sched_name` varchar(120) NOT NULL,
-  `trigger_name` varchar(200) NOT NULL,
-  `trigger_group` varchar(200) NOT NULL,
-  `cron_expression` varchar(200) NOT NULL,
-  `time_zone_id` varchar(80) DEFAULT NULL,
-  PRIMARY KEY (`sched_name`,`trigger_name`,`trigger_group`),
-  CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`)
+CREATE TABLE `qrtz_cron_triggers`
+(
+    `sched_name`      varchar(120) NOT NULL,
+    `trigger_name`    varchar(200) NOT NULL,
+    `trigger_group`   varchar(200) NOT NULL,
+    `cron_expression` varchar(200) NOT NULL,
+    `time_zone_id`    varchar(80) DEFAULT NULL,
+    PRIMARY KEY (`sched_name`, `trigger_name`, `trigger_group`),
+    CONSTRAINT `qrtz_cron_triggers_ibfk_1` FOREIGN KEY (`sched_name`, `trigger_name`, `trigger_group`) REFERENCES `qrtz_triggers` (`sched_name`, `trigger_name`, `trigger_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `qrtz_cron_triggers` */
 
-insert  into `qrtz_cron_triggers`(`sched_name`,`trigger_name`,`trigger_group`,`cron_expression`,`time_zone_id`) values 
-('crud4jScheduler','TASK_CLASS_NAME1','DEFAULT','0/10 * * * * ?','Asia/Shanghai'),
-('crud4jScheduler','TASK_CLASS_NAME2','DEFAULT','0/15 * * * * ?','Asia/Shanghai'),
-('crud4jScheduler','TASK_CLASS_NAME3','DEFAULT','0/20 * * * * ?','Asia/Shanghai'),
-('crud4jScheduler','TASK_CLASS_NAME4','DEFAULT','0/10 * * * * ?','Asia/Shanghai'),
-('RuoYiScheduler','TASK_CLASS_NAME1','DEFAULT','0/10 * * * * ?','Asia/Shanghai'),
-('RuoYiScheduler','TASK_CLASS_NAME2','DEFAULT','0/15 * * * * ?','Asia/Shanghai'),
-('RuoYiScheduler','TASK_CLASS_NAME3','DEFAULT','0/20 * * * * ?','Asia/Shanghai'),
-('RuoYiScheduler','TASK_CLASS_NAME4','DEFAULT','0/10 * * * * ?','Asia/Shanghai'),
-('Zzl4jScheduler','TASK_CLASS_NAME1','DEFAULT','0/10 * * * * ?','Asia/Shanghai'),
-('Zzl4jScheduler','TASK_CLASS_NAME2','DEFAULT','0/15 * * * * ?','Asia/Shanghai'),
-('Zzl4jScheduler','TASK_CLASS_NAME3','DEFAULT','0/20 * * * * ?','Asia/Shanghai'),
-('Zzl4jScheduler','TASK_CLASS_NAME4','DEFAULT','0/10 * * * * ?','Asia/Shanghai');
+insert into `qrtz_cron_triggers`(`sched_name`, `trigger_name`, `trigger_group`, `cron_expression`, `time_zone_id`)
+values ('crud4jScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', '0/10 * * * * ?', 'Asia/Shanghai'),
+       ('crud4jScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', '0/15 * * * * ?', 'Asia/Shanghai'),
+       ('crud4jScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', '0/20 * * * * ?', 'Asia/Shanghai'),
+       ('crud4jScheduler', 'TASK_CLASS_NAME4', 'DEFAULT', '0/10 * * * * ?', 'Asia/Shanghai'),
+       ('RuoYiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', '0/10 * * * * ?', 'Asia/Shanghai'),
+       ('RuoYiScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', '0/15 * * * * ?', 'Asia/Shanghai'),
+       ('RuoYiScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', '0/20 * * * * ?', 'Asia/Shanghai'),
+       ('RuoYiScheduler', 'TASK_CLASS_NAME4', 'DEFAULT', '0/10 * * * * ?', 'Asia/Shanghai'),
+       ('Zzl4jScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', '0/10 * * * * ?', 'Asia/Shanghai'),
+       ('Zzl4jScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', '0/15 * * * * ?', 'Asia/Shanghai'),
+       ('Zzl4jScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', '0/20 * * * * ?', 'Asia/Shanghai'),
+       ('Zzl4jScheduler', 'TASK_CLASS_NAME4', 'DEFAULT', '0/10 * * * * ?', 'Asia/Shanghai');
 
 /*Table structure for table `qrtz_fired_triggers` */
 
 DROP TABLE IF EXISTS `qrtz_fired_triggers`;
 
-CREATE TABLE `qrtz_fired_triggers` (
-  `sched_name` varchar(120) NOT NULL,
-  `entry_id` varchar(95) NOT NULL,
-  `trigger_name` varchar(200) NOT NULL,
-  `trigger_group` varchar(200) NOT NULL,
-  `instance_name` varchar(200) NOT NULL,
-  `fired_time` bigint NOT NULL,
-  `sched_time` bigint NOT NULL,
-  `priority` int NOT NULL,
-  `state` varchar(16) NOT NULL,
-  `job_name` varchar(200) DEFAULT NULL,
-  `job_group` varchar(200) DEFAULT NULL,
-  `is_nonconcurrent` varchar(1) DEFAULT NULL,
-  `requests_recovery` varchar(1) DEFAULT NULL,
-  PRIMARY KEY (`sched_name`,`entry_id`)
+CREATE TABLE `qrtz_fired_triggers`
+(
+    `sched_name`        varchar(120) NOT NULL,
+    `entry_id`          varchar(95)  NOT NULL,
+    `trigger_name`      varchar(200) NOT NULL,
+    `trigger_group`     varchar(200) NOT NULL,
+    `instance_name`     varchar(200) NOT NULL,
+    `fired_time`        bigint       NOT NULL,
+    `sched_time`        bigint       NOT NULL,
+    `priority`          int          NOT NULL,
+    `state`             varchar(16)  NOT NULL,
+    `job_name`          varchar(200) DEFAULT NULL,
+    `job_group`         varchar(200) DEFAULT NULL,
+    `is_nonconcurrent`  varchar(1)   DEFAULT NULL,
+    `requests_recovery` varchar(1)   DEFAULT NULL,
+    PRIMARY KEY (`sched_name`, `entry_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `qrtz_fired_triggers` */
@@ -159,31 +285,46 @@ CREATE TABLE `qrtz_fired_triggers` (
 
 DROP TABLE IF EXISTS `qrtz_job_details`;
 
-CREATE TABLE `qrtz_job_details` (
-  `sched_name` varchar(120) NOT NULL,
-  `job_name` varchar(200) NOT NULL,
-  `job_group` varchar(200) NOT NULL,
-  `description` varchar(250) DEFAULT NULL,
-  `job_class_name` varchar(250) NOT NULL,
-  `is_durable` varchar(1) NOT NULL,
-  `is_nonconcurrent` varchar(1) NOT NULL,
-  `is_update_data` varchar(1) NOT NULL,
-  `requests_recovery` varchar(1) NOT NULL,
-  `job_data` blob,
-  PRIMARY KEY (`sched_name`,`job_name`,`job_group`)
+CREATE TABLE `qrtz_job_details`
+(
+    `sched_name`        varchar(120) NOT NULL,
+    `job_name`          varchar(200) NOT NULL,
+    `job_group`         varchar(200) NOT NULL,
+    `description`       varchar(250) DEFAULT NULL,
+    `job_class_name`    varchar(250) NOT NULL,
+    `is_durable`        varchar(1)   NOT NULL,
+    `is_nonconcurrent`  varchar(1)   NOT NULL,
+    `is_update_data`    varchar(1)   NOT NULL,
+    `requests_recovery` varchar(1)   NOT NULL,
+    `job_data`          blob,
+    PRIMARY KEY (`sched_name`, `job_name`, `job_group`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `qrtz_job_details` */
 
-insert  into `qrtz_job_details`(`sched_name`,`job_name`,`job_group`,`description`,`job_class_name`,`is_durable`,`is_nonconcurrent`,`is_update_data`,`requests_recovery`,`job_data`) values 
-('crud4jScheduler','TASK_CLASS_NAME1','DEFAULT',NULL,'com.crud4j.quartz.util.QuartzJobExecution','0','0','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.crud4j.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0(com.crud4j.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xppppppt\00t\00/10 * * * * ?t\0ryTask.ryNoParamst\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（无参）t\01t\0\0t\01x\0'),
-('crud4jScheduler','TASK_CLASS_NAME2','DEFAULT',NULL,'com.crud4j.quartz.util.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.crud4j.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0(com.crud4j.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xppppppt\01t\00/15 * * * * ?t\0ryTask.ryParams(\'ry\')t\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（有参）t\03t\0\0t\01x\0'),
-('crud4jScheduler','TASK_CLASS_NAME3','DEFAULT',NULL,'com.crud4j.quartz.util.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.crud4j.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0(com.crud4j.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xppppppt\01t\00/20 * * * * ?t\08ryTask.ryMultipleParams(\'ry\', true, 2000L, 316.50D, 100)t\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（多参）t\03t\0\0t\01x\0'),
-('crud4jScheduler','TASK_CLASS_NAME4','DEFAULT',NULL,'com.crud4j.quartz.util.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.crud4j.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0(com.crud4j.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0u��j�xppppppt\01t\00/10 * * * * ?t\0activityTask.updateStatust\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0活动状态(无参)t\01pt\01x\0'),
-('RuoYiScheduler','TASK_CLASS_NAME1','DEFAULT',NULL,'com.ruoyi.quartz.util.QuartzJobExecution','0','0','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.ruoyi.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0\'com.ruoyi.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xppppppt\00t\00/10 * * * * ?t\0ryTask.ryNoParamst\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（无参）t\01t\0\0t\01x\0'),
-('RuoYiScheduler','TASK_CLASS_NAME2','DEFAULT',NULL,'com.ruoyi.quartz.util.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.ruoyi.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0\'com.ruoyi.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xppppppt\01t\00/15 * * * * ?t\0ryTask.ryParams(\'ry\')t\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（有参）t\03t\0\0t\01x\0'),
-('RuoYiScheduler','TASK_CLASS_NAME3','DEFAULT',NULL,'com.ruoyi.quartz.util.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.ruoyi.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0\'com.ruoyi.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xppppppt\01t\00/20 * * * * ?t\08ryTask.ryMultipleParams(\'ry\', true, 2000L, 316.50D, 100)t\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（多参）t\03t\0\0t\01x\0'),
-('RuoYiScheduler','TASK_CLASS_NAME4','DEFAULT',NULL,'com.ruoyi.quartz.util.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.ruoyi.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0\'com.ruoyi.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0u��j�xppppppt\01t\00/10 * * * * ?t\0activityTask.updateStatust\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0活动状态(无参)t\01pt\01x\0'),
+insert into `qrtz_job_details`(`sched_name`, `job_name`, `job_group`, `description`, `job_class_name`, `is_durable`,
+                               `is_nonconcurrent`, `is_update_data`, `requests_recovery`, `job_data`)
+values ('crud4jScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 'com.crud4j.quartz.util.QuartzJobExecution', '0', '0',
+        '0', '0',
+        '��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.crud4j.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0(com.crud4j.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xppppppt\00t\00/10 * * * * ?t\0ryTask.ryNoParamst\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（无参）t\01t\0\0t\01x\0'),
+       ('crud4jScheduler', 'TASK_CLASS_NAME2', 'DEFAULT', NULL,
+        'com.crud4j.quartz.util.QuartzDisallowConcurrentExecution', '0', '1', '0', '0',
+        '��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.crud4j.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0(com.crud4j.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xppppppt\01t\00/15 * * * * ?t\0ryTask.ryParams(\'ry\')t\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（有参）t\03t\0\0t\01x\0'),
+       ('crud4jScheduler', 'TASK_CLASS_NAME3', 'DEFAULT', NULL,
+        'com.crud4j.quartz.util.QuartzDisallowConcurrentExecution', '0', '1', '0', '0',
+        '��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.crud4j.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0(com.crud4j.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xppppppt\01t\00/20 * * * * ?t\08ryTask.ryMultipleParams(\'ry\', true, 2000L, 316.50D, 100)t\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（多参）t\03t\0\0t\01x\0'),
+       ('crud4jScheduler', 'TASK_CLASS_NAME4', 'DEFAULT', NULL,
+        'com.crud4j.quartz.util.QuartzDisallowConcurrentExecution', '0', '1', '0', '0',
+        '��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.crud4j.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0(com.crud4j.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0u��j�xppppppt\01t\00/10 * * * * ?t\0activityTask.updateStatust\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0活动状态(无参)t\01pt\01x\0'),
+       ('RuoYiScheduler', 'TASK_CLASS_NAME1', 'DEFAULT', NULL, 'com.ruoyi.quartz.util.QuartzJobExecution', '0', '0',
+        '0', '0',
+        '��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.ruoyi.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0\'com.ruoyi.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;
+L
+\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xppppppt\00t\00/10 * * * * ?t\0ryTask.ryNoParamst\0DEFAULTsr\0java.lang.Long;
+��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（无参）t\01t\0\0t\01x\0'),
+('RuoYiScheduler','TASK_CLASS_NAME2','DEFAULT',NULL,'com.ruoyi.quartz.util.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.ruoyi.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0\'com.ruoyi.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xppppppt\01t\00/15 * * * * ?t\0ryTask.ryParams(\'ry\')t\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（有参）t\03t\0\0t\01x\0'),
+('RuoYiScheduler','TASK_CLASS_NAME3','DEFAULT',NULL,'com.ruoyi.quartz.util.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.ruoyi.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0\'com.ruoyi.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xppppppt\01t\00/20 * * * * ?t\08ryTask.ryMultipleParams(\'ry\', true, 2000L, 316.50D, 100)t\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（多参）t\03t\0\0t\01x\0'),
+('RuoYiScheduler','TASK_CLASS_NAME4','DEFAULT',NULL,'com.ruoyi.quartz.util.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.ruoyi.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0\'com.ruoyi.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0u��j�xppppppt\01t\00/10 * * * * ?t\0activityTask.updateStatust\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0活动状态(无参)t\01pt\01x\0'),
 ('Zzl4jScheduler','TASK_CLASS_NAME1','DEFAULT',NULL,'com.zzl4j.quartz.util.QuartzJobExecution','0','0','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.zzl4j.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0\'com.zzl4j.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xppppppt\00t\00/10 * * * * ?t\0ryTask.ryNoParamst\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（无参）t\01t\0\0t\01x\0'),
 ('Zzl4jScheduler','TASK_CLASS_NAME2','DEFAULT',NULL,'com.zzl4j.quartz.util.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.zzl4j.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0\'com.zzl4j.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xppppppt\01t\00/15 * * * * ?t\0ryTask.ryParams(\'ry\')t\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（有参）t\03t\0\0t\01x\0'),
 ('Zzl4jScheduler','TASK_CLASS_NAME3','DEFAULT',NULL,'com.zzl4j.quartz.util.QuartzDisallowConcurrentExecution','0','1','0','0','��\0sr\0org.quartz.JobDataMap���迩��\0\0xr\0&org.quartz.utils.StringKeyDirtyFlagMap�����](\0Z\0allowsTransientDataxr\0org.quartz.utils.DirtyFlagMap�.�(v\n�\0Z\0dirtyL\0mapt\0Ljava/util/Map;xpsr\0java.util.HashMap���`�\0F\0\nloadFactorI\0	thresholdxp?@\0\0\0\0\0w\0\0\0\0\0\0t\0TASK_PROPERTIESsr\0com.zzl4j.quartz.domain.Job\0\0\0\0\0\0\0\0	L\0\nconcurrentt\0Ljava/lang/String;L\0cronExpressionq\0~\0	L\0invokeTargetq\0~\0	L\0jobGroupq\0~\0	L\0jobIdt\0Ljava/lang/Long;L\0jobNameq\0~\0	L\0\rmisfirePolicyq\0~\0	L\0remarkq\0~\0	L\0statusq\0~\0	xr\0\'com.zzl4j.common.core.domain.BaseEntity\0\0\0\0\0\0\0\0	L\0	beginTimeq\0~\0	L\0createByq\0~\0	L\0\ncreateTimet\0Ljava/util/Date;L\0endTimeq\0~\0	L\0paramsq\0~\0L\0parkIdq\0~\0\nL\0searchValueq\0~\0	L\0updateByq\0~\0	L\0\nupdateTimeq\0~\0xppt\0adminsr\0java.util.Datehj�KYt\0\0xpw\0\0b,�)�xppppppt\01t\00/20 * * * * ?t\08ryTask.ryMultipleParams(\'ry\', true, 2000L, 316.50D, 100)t\0DEFAULTsr\0java.lang.Long;��̏#�\0J\0valuexr\0java.lang.Number������\0\0xp\0\0\0\0\0\0\0t\0系统默认（多参）t\03t\0\0t\01x\0'),
@@ -201,7 +342,7 @@ CREATE TABLE `qrtz_locks` (
 
 /*Data for the table `qrtz_locks` */
 
-insert  into `qrtz_locks`(`sched_name`,`lock_name`) values 
+insert  into `qrtz_locks`(`sched_name`,`lock_name`) values
 ('crud4jScheduler','STATE_ACCESS'),
 ('crud4jScheduler','TRIGGER_ACCESS'),
 ('RuoyiScheduler','STATE_ACCESS'),
@@ -235,10 +376,9 @@ CREATE TABLE `qrtz_scheduler_state` (
 
 /*Data for the table `qrtz_scheduler_state` */
 
-insert  into `qrtz_scheduler_state`(`sched_name`,`instance_name`,`last_checkin_time`,`checkin_interval`) values 
+insert  into `qrtz_scheduler_state`(`sched_name`,`instance_name`,`last_checkin_time`,`checkin_interval`) values
 ('crud4jScheduler','DESKTOP-K1EHCLV1607327224051',1607330694660,15000),
-('RuoYiScheduler','DESKTOP-2F05H521615972219705',1615972239085,15000),
-('RuoYiScheduler','DESKTOP-2F05H521615972252315',1615972256525,15000),
+('RuoYiScheduler','DESKTOP-2F05H521617699066179',1617699416147,15000),
 ('Zzl4jScheduler','DESKTOP-K1EHCLV1607315509354',1607315556230,15000);
 
 /*Table structure for table `qrtz_simple_triggers` */
@@ -311,15 +451,15 @@ CREATE TABLE `qrtz_triggers` (
 
 /*Data for the table `qrtz_triggers` */
 
-insert  into `qrtz_triggers`(`sched_name`,`trigger_name`,`trigger_group`,`job_name`,`job_group`,`description`,`next_fire_time`,`prev_fire_time`,`priority`,`trigger_state`,`trigger_type`,`start_time`,`end_time`,`calendar_name`,`misfire_instr`,`job_data`) values 
+insert  into `qrtz_triggers`(`sched_name`,`trigger_name`,`trigger_group`,`job_name`,`job_group`,`description`,`next_fire_time`,`prev_fire_time`,`priority`,`trigger_state`,`trigger_type`,`start_time`,`end_time`,`calendar_name`,`misfire_instr`,`job_data`) values
 ('crud4jScheduler','TASK_CLASS_NAME1','DEFAULT','TASK_CLASS_NAME1','DEFAULT',NULL,1607327230000,-1,5,'PAUSED','CRON',1607327224000,0,NULL,-1,''),
 ('crud4jScheduler','TASK_CLASS_NAME2','DEFAULT','TASK_CLASS_NAME2','DEFAULT',NULL,1607327235000,-1,5,'PAUSED','CRON',1607327224000,0,NULL,2,''),
 ('crud4jScheduler','TASK_CLASS_NAME3','DEFAULT','TASK_CLASS_NAME3','DEFAULT',NULL,1607327240000,-1,5,'PAUSED','CRON',1607327225000,0,NULL,2,''),
 ('crud4jScheduler','TASK_CLASS_NAME4','DEFAULT','TASK_CLASS_NAME4','DEFAULT',NULL,1607327230000,-1,5,'PAUSED','CRON',1607327225000,0,NULL,-1,''),
-('RuoYiScheduler','TASK_CLASS_NAME1','DEFAULT','TASK_CLASS_NAME1','DEFAULT',NULL,1615972260000,-1,5,'PAUSED','CRON',1615972253000,0,NULL,-1,''),
-('RuoYiScheduler','TASK_CLASS_NAME2','DEFAULT','TASK_CLASS_NAME2','DEFAULT',NULL,1615972260000,-1,5,'PAUSED','CRON',1615972253000,0,NULL,2,''),
-('RuoYiScheduler','TASK_CLASS_NAME3','DEFAULT','TASK_CLASS_NAME3','DEFAULT',NULL,1615972260000,-1,5,'PAUSED','CRON',1615972253000,0,NULL,2,''),
-('RuoYiScheduler','TASK_CLASS_NAME4','DEFAULT','TASK_CLASS_NAME4','DEFAULT',NULL,1615972260000,-1,5,'PAUSED','CRON',1615972253000,0,NULL,-1,''),
+('RuoYiScheduler','TASK_CLASS_NAME1','DEFAULT','TASK_CLASS_NAME1','DEFAULT',NULL,1617699070000,-1,5,'PAUSED','CRON',1617699066000,0,NULL,-1,''),
+('RuoYiScheduler','TASK_CLASS_NAME2','DEFAULT','TASK_CLASS_NAME2','DEFAULT',NULL,1617699075000,-1,5,'PAUSED','CRON',1617699067000,0,NULL,2,''),
+('RuoYiScheduler','TASK_CLASS_NAME3','DEFAULT','TASK_CLASS_NAME3','DEFAULT',NULL,1617699080000,-1,5,'PAUSED','CRON',1617699067000,0,NULL,2,''),
+('RuoYiScheduler','TASK_CLASS_NAME4','DEFAULT','TASK_CLASS_NAME4','DEFAULT',NULL,1617699070000,-1,5,'PAUSED','CRON',1617699067000,0,NULL,-1,''),
 ('Zzl4jScheduler','TASK_CLASS_NAME1','DEFAULT','TASK_CLASS_NAME1','DEFAULT',NULL,1607315510000,-1,5,'PAUSED','CRON',1607315509000,0,NULL,-1,''),
 ('Zzl4jScheduler','TASK_CLASS_NAME2','DEFAULT','TASK_CLASS_NAME2','DEFAULT',NULL,1607315520000,-1,5,'PAUSED','CRON',1607315510000,0,NULL,2,''),
 ('Zzl4jScheduler','TASK_CLASS_NAME3','DEFAULT','TASK_CLASS_NAME3','DEFAULT',NULL,1607315520000,-1,5,'PAUSED','CRON',1607315510000,0,NULL,2,''),
@@ -346,7 +486,7 @@ CREATE TABLE `sys_config` (
 
 /*Data for the table `sys_config` */
 
-insert  into `sys_config`(`config_id`,`config_name`,`config_key`,`config_value`,`config_type`,`tenant_id`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values 
+insert  into `sys_config`(`config_id`,`config_name`,`config_key`,`config_value`,`config_type`,`tenant_id`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values
 (99,'oss存储配置','sys.oss.cloudStorage','{\"type\":1,\"qiniuDomain\":\"http://sfa.cx\",\"qiniuPrefix\":\"231\",\"qiniuAccessKey\":\"1231\",\"qiniuSecretKey\":\"1231\",\"qiniuBucketName\":\"1231\",\"aliyunDomain\":\"\",\"aliyunPrefix\":\"\",\"aliyunEndPoint\":\"\",\"aliyunAccessKeyId\":\"\",\"aliyunAccessKeySecret\":\"\",\"aliyunBucketName\":\"\",\"qcloudDomain\":\"\",\"qcloudPrefix\":\"\",\"qcloudSecretId\":\"\",\"qcloudBucketName\":\"\",\"qcloudRegion\":\"\"}','Y',NULL,'admin','2018-03-16 11:33:00','','2020-11-26 14:53:09','oss存储配置'),
 (100,'ICS站点地址','sys.setting.siteUrl','{\"siteUrl\":\"http://192.168.1.105:9227\"}','N',NULL,'','2020-11-16 17:15:43','admin','2021-01-29 15:55:03','ICS站点地址'),
 (101,'APP私钥','sys.setting.appKey','{ \"appId\": \"123456\", \"key\": \"1a2b3c4d\" }','N',NULL,'admin','2020-11-30 14:42:18','',NULL,'APP私钥');
@@ -378,7 +518,7 @@ CREATE TABLE `sys_dept` (
 
 /*Data for the table `sys_dept` */
 
-insert  into `sys_dept`(`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`leader_id`,`phone`,`email`,`status`,`is_default`,`del_flag`,`park_id`,`create_by`,`create_time`,`update_by`,`update_time`) values 
+insert  into `sys_dept`(`dept_id`,`parent_id`,`ancestors`,`dept_name`,`order_num`,`leader`,`leader_id`,`phone`,`email`,`status`,`is_default`,`del_flag`,`park_id`,`create_by`,`create_time`,`update_by`,`update_time`) values
 (100,0,'0','同天集团',0,'若依',1,'15888888888','ry@qq.com','0','\0','0',1,'admin','2018-03-16 11:33:00','admin','2020-11-03 16:50:45'),
 (101,100,'0,100','广东工业设计城',1,'若依',1,'15888888888','ry@qq.com','0','\0','0',1,'admin','2018-03-16 11:33:00','admin','2020-11-03 16:50:45'),
 (103,101,'0,100,101','研发部门',2,'若依',1,'15888888888','ry@qq.com','0','\0','0',1,'admin','2018-03-16 11:33:00','admin','2020-11-03 16:50:39'),
@@ -409,7 +549,7 @@ CREATE TABLE `sys_dict_data` (
 
 /*Data for the table `sys_dict_data` */
 
-insert  into `sys_dict_data`(`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values 
+insert  into `sys_dict_data`(`dict_code`,`dict_sort`,`dict_label`,`dict_value`,`dict_type`,`css_class`,`list_class`,`is_default`,`status`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values
 (1,1,'男','0','sys_user_gender','','','Y','0','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','性别男'),
 (2,2,'女','1','sys_user_gender','','','N','0','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','性别女'),
 (3,3,'未知','2','sys_user_gender','','','N','0','admin','2018-03-16 11:33:00','ry','2019-06-12 19:08:17','性别未知'),
@@ -470,7 +610,7 @@ CREATE TABLE `sys_dict_type` (
 
 /*Data for the table `sys_dict_type` */
 
-insert  into `sys_dict_type`(`dict_id`,`dict_name`,`dict_type`,`status`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values 
+insert  into `sys_dict_type`(`dict_id`,`dict_name`,`dict_type`,`status`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values
 (1,'用户性别','sys_user_gender','0','admin','2018-03-16 11:33:00','ry','2019-06-12 16:41:29','用户性别列表'),
 (2,'菜单状态','sys_show_hide','0','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','菜单状态列表'),
 (3,'系统开关','sys_normal_disable','0','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','系统开关列表'),
@@ -503,7 +643,7 @@ CREATE TABLE `sys_districts` (
 
 /*Data for the table `sys_districts` */
 
-insert  into `sys_districts`(`id`,`pid`,`deep`,`name`,`pinyin`,`pinyin_shor`,`ext_name`,`create_time`,`update_time`,`operator`) values 
+insert  into `sys_districts`(`id`,`pid`,`deep`,`name`,`pinyin`,`pinyin_shor`,`ext_name`,`create_time`,`update_time`,`operator`) values
 (11,0,0,'北京','bei jing','bej','北京市','2018-12-19 14:26:58','2018-12-19 15:02:37','admin'),
 (12,0,0,'天津','tian jin','tij','天津市','2018-12-19 14:26:58','2018-12-19 14:26:58','admin'),
 (13,0,0,'河北','he bei','heb','河北省','2018-12-19 14:26:58','2018-12-19 14:26:58','admin'),
@@ -3919,7 +4059,7 @@ CREATE TABLE `sys_job` (
 
 /*Data for the table `sys_job` */
 
-insert  into `sys_job`(`job_id`,`job_name`,`job_group`,`invoke_target`,`cron_expression`,`misfire_policy`,`concurrent`,`status`,`park_id`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values 
+insert  into `sys_job`(`job_id`,`job_name`,`job_group`,`invoke_target`,`cron_expression`,`misfire_policy`,`concurrent`,`status`,`park_id`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values
 (1,'系统默认（无参）','DEFAULT','ryTask.ryNoParams','0/10 * * * * ?','1','0','1',1,'admin','2018-03-16 11:33:00','admin','2020-11-04 18:08:43',''),
 (2,'系统默认（有参）','DEFAULT','ryTask.ryParams(\'ry\')','0/15 * * * * ?','3','1','1',1,'admin','2018-03-16 11:33:00','ry','2020-09-23 16:46:31',''),
 (3,'系统默认（多参）','DEFAULT','ryTask.ryMultipleParams(\'ry\', true, 2000L, 316.50D, 100)','0/20 * * * * ?','3','1','1',1,'admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00',''),
@@ -3947,7 +4087,7 @@ CREATE TABLE `sys_job_log` (
 
 /*Data for the table `sys_job_log` */
 
-insert  into `sys_job_log`(`job_log_id`,`job_name`,`job_group`,`invoke_target`,`job_message`,`status`,`exception_info`,`park_id`,`create_by`,`create_time`,`update_by`,`update_time`) values 
+insert  into `sys_job_log`(`job_log_id`,`job_name`,`job_group`,`invoke_target`,`job_message`,`status`,`exception_info`,`park_id`,`create_by`,`create_time`,`update_by`,`update_time`) values
 (1,'系统默认（无参）','DEFAULT','ryTask.ryNoParams','系统默认（无参） 总共耗时：1毫秒','0',NULL,1,NULL,'2020-09-23 15:50:17',NULL,NULL),
 (2,'系统默认（无参）','DEFAULT','ryTask.ryNoParams','系统默认（无参） 总共耗时：0毫秒','0',NULL,1,NULL,'2020-09-23 15:50:46',NULL,NULL),
 (3,'系统默认（无参）','DEFAULT','ryTask.ryNoParams','系统默认（无参） 总共耗时：0毫秒','0',NULL,1,NULL,'2020-09-23 15:52:40',NULL,NULL),
@@ -4550,12 +4690,16 @@ CREATE TABLE `sys_login_info` (
   `msg` varchar(255) DEFAULT '' COMMENT '提示消息',
   `login_time` datetime DEFAULT NULL COMMENT '访问时间',
   PRIMARY KEY (`info_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='系统访问记录';
 
 /*Data for the table `sys_login_info` */
 
-insert  into `sys_login_info`(`info_id`,`login_name`,`ipaddr`,`login_location`,`browser`,`os`,`status`,`msg`,`login_time`) values 
-(1,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-03-17 17:08:20');
+insert  into `sys_login_info`(`info_id`,`login_name`,`ipaddr`,`login_location`,`browser`,`os`,`status`,`msg`,`login_time`) values
+(1,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-03-17 17:08:20'),
+(2,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-03-17 17:57:13'),
+(3,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-03-17 17:57:53'),
+(4,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-04-06 16:48:07'),
+(5,'admin','127.0.0.1','内网IP','Chrome 8','Windows 10','0','登录成功','2021-04-06 16:51:31');
 
 /*Table structure for table `sys_menu` */
 
@@ -4588,7 +4732,7 @@ CREATE TABLE `sys_menu` (
 
 /*Data for the table `sys_menu` */
 
-insert  into `sys_menu`(`menu_id`,`menu_name`,`menu_key`,`component`,`parent_id`,`target`,`order_num`,`menu_type`,`visible`,`perms`,`icon`,`path`,`redirect`,`hidden_children`,`hidden_header`,`park_id`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values 
+insert  into `sys_menu`(`menu_id`,`menu_name`,`menu_key`,`component`,`parent_id`,`target`,`order_num`,`menu_type`,`visible`,`perms`,`icon`,`path`,`redirect`,`hidden_children`,`hidden_header`,`park_id`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values
 (1,'系统管理','system','PageView',0,'',19,'M','0','','setting',NULL,NULL,NULL,NULL,1,'admin','2018-03-16 11:33:00','ry','2020-10-09 09:33:06','系统管理目录'),
 (2,'系统监控','monitor','PageView',0,'',20,'M','0','','video-camera',NULL,NULL,NULL,NULL,1,'admin','2018-03-16 11:33:00','ry','2020-10-09 09:33:28','系统监控目录'),
 (3,'系统工具','tool','PageView',0,'',30,'M','0','','bars',NULL,NULL,NULL,NULL,1,'admin','2018-03-16 11:33:00','ry','2020-10-09 09:33:22','系统工具目录'),
@@ -4686,7 +4830,39 @@ insert  into `sys_menu`(`menu_id`,`menu_name`,`menu_key`,`component`,`parent_id`
 (2029,'安全设置','security','account/settings/Security',2027,'',2,'M','0',NULL,'#',NULL,NULL,0,0,1,'','2020-09-30 15:41:22','',NULL,''),
 (2030,'个性化设置','custom','account/settings/Custom',2027,'',3,'M','0',NULL,'#',NULL,NULL,0,0,1,'','2020-09-30 15:43:34','',NULL,''),
 (2031,'账户绑定','binding','account/settings/Binding',2027,'',4,'M','0',NULL,'#',NULL,NULL,0,0,1,'','2020-09-30 15:45:41','',NULL,''),
-(2032,'新消息通知','notification','account/settings/Notification',2027,'',5,'M','0',NULL,'#',NULL,NULL,0,0,1,'','2020-09-30 15:46:40','',NULL,'');
+(2032,'新消息通知','notification','account/settings/Notification',2027,'',5,'M','0',NULL,'#',NULL,NULL,0,0,1,'','2020-09-30 15:46:40','',NULL,''),
+(2104,'党建园地','business/dj','PageView',0,'',11,'M','0',NULL,'flag',NULL,NULL,0,0,1,'admin','2020-10-27 16:44:56','',NULL,''),
+(2105,'党建banner','djBanner','business/DjBannerList',2104,'',1,'C','0','business:djBanner:view','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-27 16:49:04','ry','2020-10-27 16:49:04','党建banner菜单'),
+(2106,'党建banner查询','',NULL,2105,'',1,'F','0','business:djBanner:list','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-27 16:49:04','ry','2020-10-27 16:49:04',''),
+(2107,'党建banner新增','',NULL,2105,'',2,'F','0','business:djBanner:add','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-27 16:49:04','ry','2020-10-27 16:49:04',''),
+(2108,'党建banner修改','',NULL,2105,'',3,'F','0','business:djBanner:edit','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-27 16:49:04','ry','2020-10-27 16:49:04',''),
+(2109,'党建banner删除','',NULL,2105,'',4,'F','0','business:djBanner:remove','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-27 16:49:04','ry','2020-10-27 16:49:04',''),
+(2110,'banner编辑','bannerEdit','business/DjBannerEdit',2104,'',2,'M','1','business:djBanner:edit','#',NULL,NULL,0,0,1,'admin','2020-10-27 16:57:59','',NULL,''),
+(2111,'党建管理','dj','business/DjList',2104,'',1,'C','0','business:dj:view','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-27 17:38:56','ry','2020-10-27 17:38:56','党建管理菜单'),
+(2112,'党建管理查询','',NULL,2111,'',1,'F','0','business:dj:list','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-27 17:38:56','ry','2020-10-27 17:38:56',''),
+(2113,'党建管理新增','',NULL,2111,'',2,'F','0','business:dj:add','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-27 17:38:56','ry','2020-10-27 17:38:56',''),
+(2114,'党建管理修改','',NULL,2111,'',3,'F','0','business:dj:edit','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-27 17:38:56','ry','2020-10-27 17:38:56',''),
+(2115,'党建管理删除','',NULL,2111,'',4,'F','0','business:dj:remove','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-27 17:38:56','ry','2020-10-27 17:38:56',''),
+(2116,'党建管理编辑','djEdit','business/DjEdit',2104,'',4,'M','1',NULL,'#',NULL,NULL,0,0,1,'admin','2020-10-27 17:46:13','',NULL,''),
+(2118,'政策信息','business/policy','PageView',0,'',11,'M','0',NULL,'notification',NULL,NULL,0,0,1,'admin','2020-10-29 10:19:19','',NULL,''),
+(2119,'政策banner','banner','business/PolicyBannerList',2118,'',1,'C','0','business:policyBanner:view','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-29 10:24:20','ry','2020-10-29 10:24:20','政策banner菜单'),
+(2120,'政策banner查询','',NULL,2119,'',1,'F','0','business:policyBanner:list','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-29 10:24:20','ry','2020-10-29 10:24:20',''),
+(2121,'政策banner新增','',NULL,2119,'',2,'F','0','business:policyBanner:add','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-29 10:24:20','ry','2020-10-29 10:24:20',''),
+(2122,'政策banner修改','',NULL,2119,'',3,'F','0','business:policyBanner:edit','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-29 10:24:20','ry','2020-10-29 10:24:20',''),
+(2123,'政策banner删除','',NULL,2119,'',4,'F','0','business:policyBanner:remove','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-29 10:24:20','ry','2020-10-29 10:24:20',''),
+(2124,'政策管理','policyManage','business/PolicyList',2118,'',1,'C','0','business:policy:view','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-29 10:29:24','ry','2020-10-29 10:29:24','政策管理菜单'),
+(2125,'政策管理查询','',NULL,2124,'',1,'F','0','business:policy:list','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-29 10:29:24','ry','2020-10-29 10:29:24',''),
+(2126,'政策管理新增','',NULL,2124,'',2,'F','0','business:policy:add','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-29 10:29:24','ry','2020-10-29 10:29:24',''),
+(2127,'政策管理修改','',NULL,2124,'',3,'F','0','business:policy:edit','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-29 10:29:24','ry','2020-10-29 10:29:24',''),
+(2128,'政策管理删除','',NULL,2124,'',4,'F','0','business:policy:remove','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-10-29 10:29:24','ry','2020-10-29 10:29:24',''),
+(2129,'政策banner编辑','policyBannerEdit','business/PolicyBannerEdit',2118,'',1,'M','1',NULL,'#',NULL,NULL,0,0,1,'admin','2020-10-29 11:37:18','',NULL,''),
+(2130,'政策信息编辑','policyEdit','business/PolicyEdit',2118,'',1,'M','1',NULL,'#',NULL,NULL,0,0,1,'admin','2020-10-29 11:38:29','',NULL,''),
+(2185,'资产管理','business/fund','PageView',0,'',10,'M','0','','file-done',NULL,NULL,0,0,1,'admin','2020-11-12 16:46:42','admin','2020-11-12 16:50:19',''),
+(2187,'费项配置','expenseSettings','business/ExpenseSettingsList',2185,'',1,'C','0','business:expenseSettings:view','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-11-12 17:42:16','admin','2020-12-22 09:16:20','费项配置菜单'),
+(2188,'费项配置查询','',NULL,2187,'',1,'F','0','business:expenseSettings:list','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-11-12 17:42:16','ry','2020-11-12 17:42:16',''),
+(2189,'费项配置新增','',NULL,2187,'',2,'F','0','business:expenseSettings:add','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-11-12 17:42:16','ry','2020-11-12 17:42:16',''),
+(2190,'费项配置修改','',NULL,2187,'',3,'F','0','business:expenseSettings:edit','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-11-12 17:42:16','ry','2020-11-12 17:42:16',''),
+(2191,'费项配置删除','',NULL,2187,'',4,'F','0','business:expenseSettings:remove','#',NULL,NULL,NULL,NULL,NULL,'admin','2020-11-12 17:42:16','ry','2020-11-12 17:42:16','');
 
 /*Table structure for table `sys_notice` */
 
@@ -4709,7 +4885,7 @@ CREATE TABLE `sys_notice` (
 
 /*Data for the table `sys_notice` */
 
-insert  into `sys_notice`(`notice_id`,`notice_title`,`notice_type`,`notice_content`,`status`,`park_id`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values 
+insert  into `sys_notice`(`notice_id`,`notice_title`,`notice_type`,`notice_content`,`status`,`park_id`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values
 (1,'温馨提醒：2018-07-01 若依新版本发布啦','2','新版本内容','0',1,'admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','管理员'),
 (2,'维护通知：2018-07-01 若依系统凌晨维护','1','维护内容','0',1,'admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','管理员');
 
@@ -4738,7 +4914,7 @@ CREATE TABLE `sys_oper_log` (
 
 /*Data for the table `sys_oper_log` */
 
-insert  into `sys_oper_log`(`oper_id`,`title`,`business_type`,`method`,`request_method`,`operator_type`,`oper_name`,`dept_name`,`oper_url`,`oper_ip`,`oper_location`,`oper_param`,`status`,`error_msg`,`oper_time`) values 
+insert  into `sys_oper_log`(`oper_id`,`title`,`business_type`,`method`,`request_method`,`operator_type`,`oper_name`,`dept_name`,`oper_url`,`oper_ip`,`oper_location`,`oper_param`,`status`,`error_msg`,`oper_time`) values
 (1,'操作日志',9,'com.ruoyi.controller.monitor.OperLogController.clean()','POST',1,'admin',NULL,'/monitor/operLog/clean','127.0.0.1','内网IP','[]',0,NULL,'2021-03-17 16:58:00'),
 (2,'在线用户',7,'com.ruoyi.controller.monitor.OnlineController.forceLogout()','POST',1,'admin',NULL,'/monitor/online/forceLogout','127.0.0.1','内网IP','[\n	\"7774ada4d439420aa43fc6f985961a4c\"\n]',0,NULL,'2021-03-17 16:58:19'),
 (3,'在线用户',7,'com.ruoyi.controller.monitor.OnlineController.forceLogout()','POST',1,'admin',NULL,'/monitor/online/forceLogout','127.0.0.1','内网IP','[\n	\"7774ada4d439420aa43fc6f985961a4c\"\n]',0,NULL,'2021-03-17 16:58:25'),
@@ -4761,7 +4937,7 @@ CREATE TABLE `sys_oss` (
 
 /*Data for the table `sys_oss` */
 
-insert  into `sys_oss`(`id`,`file_name`,`file_suffix`,`url`,`create_time`,`create_by`,`service`) values 
+insert  into `sys_oss`(`id`,`file_name`,`file_suffix`,`url`,`create_time`,`create_by`,`service`) values
 (31,'12.jpeg','.jpeg','http://img.zmrit.com/upload/20190812/07c9c9fa045d41249887059cc52079cf.jpeg','2019-08-12 17:33:44','admin',1),
 (32,'9.jpeg','.jpeg','http://img.zmrit.com/upload/20190812/1259bffa90f84cb1baead19596544101.jpeg','2019-08-12 17:34:27','admin',1),
 (33,'10.jpeg','.jpeg','http://img.zmrit.com/upload/20190812/296a5da21e464410a5185c668d406385.jpeg','2019-08-12 17:34:40','admin',1),
@@ -4805,7 +4981,7 @@ CREATE TABLE `sys_role` (
 
 /*Data for the table `sys_role` */
 
-insert  into `sys_role`(`role_id`,`role_name`,`role_key`,`role_sort`,`data_scope`,`status`,`is_default`,`del_flag`,`park_id`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values 
+insert  into `sys_role`(`role_id`,`role_name`,`role_key`,`role_sort`,`data_scope`,`status`,`is_default`,`del_flag`,`park_id`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values
 (1,'超级管理员','admin',1,'1','0','\0','0',1,'admin','2018-03-16 11:33:00','admin','2020-11-03 15:40:38','管理员'),
 (2,'普通会员','common',2,'5','0','','0',10,'admin','2018-03-16 11:33:00','admin','2021-01-11 14:09:15','普通角色'),
 (3,'铜牌会员','copper',3,'5','0','\0','0',2,'admin','2020-10-16 18:24:19','admin','2020-11-03 15:40:06',NULL),
@@ -4826,7 +5002,7 @@ CREATE TABLE `sys_role_dept` (
 
 /*Data for the table `sys_role_dept` */
 
-insert  into `sys_role_dept`(`role_id`,`dept_id`) values 
+insert  into `sys_role_dept`(`role_id`,`dept_id`) values
 (2,100),
 (2,101),
 (2,105);
@@ -4843,7 +5019,7 @@ CREATE TABLE `sys_role_menu` (
 
 /*Data for the table `sys_role_menu` */
 
-insert  into `sys_role_menu`(`role_id`,`menu_id`) values 
+insert  into `sys_role_menu`(`role_id`,`menu_id`) values
 (2,1),
 (2,4),
 (2,100),
@@ -5262,7 +5438,7 @@ CREATE TABLE `sys_sn` (
 
 /*Data for the table `sys_sn` */
 
-insert  into `sys_sn`(`id`,`type`,`last_value`,`version`,`create_time`,`update_time`) values 
+insert  into `sys_sn`(`id`,`type`,`last_value`,`version`,`create_time`,`update_time`) values
 (1,0,216,16,'2020-05-12 16:03:17','2020-11-19 14:34:17'),
 (2,1,200,0,'2020-05-12 16:03:17','2020-05-12 16:03:17'),
 (3,2,200,0,'2020-05-12 16:03:17','2020-05-12 16:03:17'),
@@ -5306,8 +5482,8 @@ CREATE TABLE `sys_user` (
 
 /*Data for the table `sys_user` */
 
-insert  into `sys_user`(`user_id`,`dept_id`,`login_name`,`user_name`,`user_type`,`openid`,`email`,`mobile`,`gender`,`post`,`avatar`,`password`,`salt`,`status`,`del_flag`,`login_ip`,`login_date`,`park_id`,`customer_id`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values 
-(1,103,'admin','若依-管理员',2,NULL,'ry@163.com','13800138001','0','Java开发工程师','/profile/2021/01/06/3548e4de521858f0f33d58b71e4b0e08.jpeg','8aa9dcb09bdbc0d67ff84d95d51b8bf3','XMS4yi','0','0','127.0.0.1','2021-03-17 17:08:21',1,12,'admin','2018-03-16 11:33:00','admin','2021-03-17 17:08:20','管理员'),
+insert  into `sys_user`(`user_id`,`dept_id`,`login_name`,`user_name`,`user_type`,`openid`,`email`,`mobile`,`gender`,`post`,`avatar`,`password`,`salt`,`status`,`del_flag`,`login_ip`,`login_date`,`park_id`,`customer_id`,`create_by`,`create_time`,`update_by`,`update_time`,`remark`) values
+(1,103,'admin','若依-管理员',2,NULL,'ry@163.com','13800138001','0','Java开发工程师','/profile/2021/01/06/3548e4de521858f0f33d58b71e4b0e08.jpeg','8aa9dcb09bdbc0d67ff84d95d51b8bf3','XMS4yi','0','0','127.0.0.1','2021-04-06 16:51:31',1,12,'admin','2018-03-16 11:33:00','admin','2021-04-06 16:51:31','管理员'),
 (2,105,'ry','若依',1,NULL,'ry@qq.com','15666666666','1','设计师','/profile/2020/12/10/8a8422a7dda645a70d88108885d95634.jpeg','d38ca669c37aaaecaa07142c42f8777e','WlAQVj','0','0','127.0.0.1','2021-03-12 16:23:35',10,12,'admin','2018-03-16 11:33:00','admin','2021-03-12 16:23:34','测试员11');
 
 /*Table structure for table `sys_user_role` */
