@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.business.mapper.ExpenseSettingsMapper">
+
+    <resultMap type="com.ruoyi.business.domain.ExpenseSettings" id="ExpenseSettingsResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="unitsCode" column="units_code"/>
+        <result property="taxFee" column="tax_fee"/>
+        <result property="memo" column="memo"/>
+        <result property="parkId" column="park_id"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="isEnabled" column="is_enabled"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="selectExpenseSettingsVo">
+        SELECT id, name, type, units_code, tax_fee, memo, park_id, create_by, update_by, create_time, update_time ,is_enabled FROM ics_expense_settings
+    </sql>
+
+    <select id="selectExpenseSettingsList" parameterType="ExpenseSettings" resultMap="ExpenseSettingsResult">
+        <include refid="selectExpenseSettingsVo"/>
+        <where>
+            <if test="name != null  and name != ''">AND name LIKE CONCAT('%', #{name}, '%')</if>
+            <if test="type != null">AND type = #{type}</if>
+        </where>
+    </select>
+
+    <select id="selectExpenseSettingsById" parameterType="Long" resultMap="ExpenseSettingsResult">
+        <include refid="selectExpenseSettingsVo"/>
+        WHERE id = #{id}
+    </select>
+
+</mapper>
