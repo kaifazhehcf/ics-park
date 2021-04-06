@@ -15,14 +15,14 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
     druid:
-      # 主库数据源
+      # 主库数据源   测试环境
       master:
         url: jdbc:mysql://localhost:3306/ry_ics?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
         username: root
         password: root
       # 从库数据源
       slave:
-        #从数据源开关/默认关闭
+        #从数据源开关/默认关闭      测试环境
         enabled: false
         url: jdbc:mysql://localhost:3306/ry_ics?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
         username: root
@@ -74,8 +74,8 @@ dfs:
 # 公众号配置(必填)
 wx:
   miniapp:
-    appid: wx387e34865345654545454634658fef                        # 我乱输入的，哈哈哈哈（请换成自己的）
-    secret: a3f64d4963ae8fa243434366c9910059e0ca326c         # 我乱输入的，哈哈哈哈（请换成自己的）
+    appid: wx387e3486534565454545444444634658fef                        # 我乱输入的，哈哈哈哈（请换成自己的）
+    secret: a3f64d4963ae8fa24343436446c9910059e0ca326c         # 我乱输入的，哈哈哈哈（请换成自己的）
     token:
     aesKey:
     msgDataFormat: JSON              # 消息格式，XML或者JSON.
