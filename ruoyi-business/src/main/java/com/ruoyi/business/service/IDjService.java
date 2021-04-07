@@ -11,8 +11,7 @@ import java.util.List;
  * @author zzm
  * @date 2020-10-27
  */
-public interface IDjService extends IBaseService<Dj>
-{
+public interface IDjService extends IBaseService<Dj> {
     /**
      * 查询党建管理
      *

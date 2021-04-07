@@ -16,7 +16,6 @@ import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.core.controller.BaseController;
 
 
-
 /**
  * 党建管理 提供者
  *

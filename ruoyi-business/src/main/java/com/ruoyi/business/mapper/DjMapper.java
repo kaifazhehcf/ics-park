@@ -3,6 +3,7 @@ package com.ruoyi.business.mapper;
 import com.ruoyi.business.domain.Dj;
 import com.ruoyi.common.core.dao.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+
 import java.util.List;
 
 /**
@@ -12,8 +13,7 @@ import java.util.List;
  * @date 2020-10-27
  */
 @Mapper
-public interface DjMapper extends BaseMapper<Dj>
-{
+public interface DjMapper extends BaseMapper<Dj> {
     /**
      * 查询党建管理
      *

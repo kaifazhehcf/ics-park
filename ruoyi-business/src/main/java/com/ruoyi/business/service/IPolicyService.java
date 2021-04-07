@@ -11,8 +11,7 @@ import java.util.List;
  * @author zzm
  * @date 2020-10-29
  */
-public interface IPolicyService extends IBaseService<Policy>
-{
+public interface IPolicyService extends IBaseService<Policy> {
     /**
      * 查询政策管理
      *

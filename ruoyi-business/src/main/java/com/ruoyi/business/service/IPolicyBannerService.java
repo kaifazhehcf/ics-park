@@ -11,8 +11,7 @@ import java.util.List;
  * @author zzm
  * @date 2020-10-29
  */
-public interface IPolicyBannerService extends IBaseService<PolicyBanner>
-{
+public interface IPolicyBannerService extends IBaseService<PolicyBanner> {
     /**
      * 查询政策banner
      *

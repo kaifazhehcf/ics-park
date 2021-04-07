@@ -5,33 +5,49 @@
 <mapper namespace="com.ruoyi.business.mapper.DjBannerMapper">
 
     <resultMap type="com.ruoyi.business.domain.DjBanner" id="DjBannerResult">
-        <result property="id"    column="id"    />
-        <result property="bannerName"    column="banner_name"    />
-        <result property="bannerDesc"    column="banner_desc"    />
-        <result property="bannerImg"    column="banner_img"    />
-        <result property="url"    column="url"    />
-        <result property="hits"    column="hits"    />
-        <result property="isMarketable"    column="is_marketable"    />
-        <result property="isTop"    column="is_top"    />
-        <result property="delFlag"    column="del_flag"    />
-        <result property="parkId"    column="park_id"    />
-        <result property="createBy"    column="create_by"    />
-        <result property="updateBy"    column="update_by"    />
-        <result property="marketableTime"    column="marketable_time"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="updateTime"    column="update_time"    />
+        <result property="id" column="id"/>
+        <result property="bannerName" column="banner_name"/>
+        <result property="bannerDesc" column="banner_desc"/>
+        <result property="bannerImg" column="banner_img"/>
+        <result property="url" column="url"/>
+        <result property="hits" column="hits"/>
+        <result property="isMarketable" column="is_marketable"/>
+        <result property="isTop" column="is_top"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="parkId" column="park_id"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="marketableTime" column="marketable_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
     </resultMap>
 
     <sql id="selectDjBannerVo">
-        select id, banner_name, banner_desc, banner_img, url, hits, is_marketable, is_top, del_flag, park_id, marketable_time, create_by, update_by, create_time, update_time from ics_dj_banner
+        select id,
+               banner_name,
+               banner_desc,
+               banner_img,
+               url,
+               hits,
+               is_marketable,
+               is_top,
+               del_flag,
+               park_id,
+               marketable_time,
+               create_by,
+               update_by,
+               create_time,
+               update_time
+        from ics_dj_banner
     </sql>
 
     <select id="selectDjBannerList" parameterType="com.ruoyi.business.domain.DjBanner" resultMap="DjBannerResult">
         <include refid="selectDjBannerVo"/>
         <where>
-            <if test="bannerName != null  and bannerName != ''"> and banner_name like concat('%', #{bannerName}, '%')</if>
-            <if test="parkId != null"> and park_id = #{parkId}</if>
-            <if test="isMarketable != null"> and is_marketable = #{isMarketable}</if>
+            <if test="bannerName != null  and bannerName != ''">and banner_name like concat('%', #{bannerName}, '%')
+            </if>
+            <if test="parkId != null">and park_id = #{parkId}</if>
+            <if test="isMarketable != null">and is_marketable = #{isMarketable}</if>
         </where>
     </select>
 

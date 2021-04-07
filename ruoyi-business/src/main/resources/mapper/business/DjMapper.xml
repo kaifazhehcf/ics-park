@@ -5,29 +5,40 @@
 <mapper namespace="com.ruoyi.business.mapper.DjMapper">
 
     <resultMap type="com.ruoyi.business.domain.Dj" id="DjResult">
-        <result property="id"    column="id"    />
-        <result property="djName"    column="dj_name"    />
-        <result property="content"    column="content"    />
-        <result property="isMarketable"    column="is_marketable"    />
-        <result property="marketableTime"    column="marketable_time"    />
-        <result property="delFlag"    column="del_flag"    />
-        <result property="parkId"    column="park_id"    />
-        <result property="createBy"    column="create_by"    />
-        <result property="updateBy"    column="update_by"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="updateTime"    column="update_time"    />
+        <result property="id" column="id"/>
+        <result property="djName" column="dj_name"/>
+        <result property="content" column="content"/>
+        <result property="isMarketable" column="is_marketable"/>
+        <result property="marketableTime" column="marketable_time"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="parkId" column="park_id"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
     </resultMap>
 
     <sql id="selectDjVo">
-        select id, dj_name, content, is_marketable, del_flag, park_id, create_by, update_by, marketable_time, create_time, update_time from ics_dj
+        select id,
+               dj_name,
+               content,
+               is_marketable,
+               del_flag,
+               park_id,
+               create_by,
+               update_by,
+               marketable_time,
+               create_time,
+               update_time
+        from ics_dj
     </sql>
 
     <select id="selectDjList" parameterType="com.ruoyi.business.domain.Dj" resultMap="DjResult">
         <include refid="selectDjVo"/>
         <where>
-            <if test="djName != null  and djName != ''"> and dj_name like concat('%', #{djName}, '%')</if>
-            <if test="parkId != null"> and park_id = #{parkId}</if>
-            <if test="isMarketable != null"> and is_marketable = #{isMarketable}</if>
+            <if test="djName != null  and djName != ''">and dj_name like concat('%', #{djName}, '%')</if>
+            <if test="parkId != null">and park_id = #{parkId}</if>
+            <if test="isMarketable != null">and is_marketable = #{isMarketable}</if>
         </where>
     </select>
 

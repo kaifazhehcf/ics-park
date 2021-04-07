@@ -18,8 +18,7 @@ import org.springframework.stereotype.Service;
  * @date 2020-10-29
  */
 @Service
-public class PolicyBannerServiceImpl extends IBaseServiceImpl<PolicyBanner> implements IPolicyBannerService
-{
+public class PolicyBannerServiceImpl extends IBaseServiceImpl<PolicyBanner> implements IPolicyBannerService {
     @Autowired
     private PolicyBannerMapper policyBannerMapper;
 
@@ -30,8 +29,7 @@ public class PolicyBannerServiceImpl extends IBaseServiceImpl<PolicyBanner> impl
      * @return 政策banner
      */
     @Override
-    public PolicyBanner selectPolicyBannerById(Long id)
-    {
+    public PolicyBanner selectPolicyBannerById(Long id) {
         return policyBannerMapper.selectPolicyBannerById(id);
     }
 
@@ -42,8 +40,7 @@ public class PolicyBannerServiceImpl extends IBaseServiceImpl<PolicyBanner> impl
      * @return 政策banner
      */
     @Override
-    public List<PolicyBanner> selectPolicyBannerList(PolicyBanner policyBanner)
-    {
+    public List<PolicyBanner> selectPolicyBannerList(PolicyBanner policyBanner) {
         return policyBannerMapper.selectPolicyBannerList(policyBanner);
     }
 
@@ -54,8 +51,7 @@ public class PolicyBannerServiceImpl extends IBaseServiceImpl<PolicyBanner> impl
      * @return 结果
      */
     @Override
-    public int insertPolicyBanner(PolicyBanner policyBanner)
-    {
+    public int insertPolicyBanner(PolicyBanner policyBanner) {
         policyBanner.setCreateTime(DateUtils.getNowDate());
         return this.save(policyBanner);
     }
@@ -67,8 +63,7 @@ public class PolicyBannerServiceImpl extends IBaseServiceImpl<PolicyBanner> impl
      * @return 结果
      */
     @Override
-    public int updatePolicyBanner(PolicyBanner policyBanner)
-    {
+    public int updatePolicyBanner(PolicyBanner policyBanner) {
         policyBanner.setUpdateTime(DateUtils.getNowDate());
         return this.update(policyBanner);
     }
@@ -80,8 +75,7 @@ public class PolicyBannerServiceImpl extends IBaseServiceImpl<PolicyBanner> impl
      * @return 结果
      */
     @Override
-    public int deletePolicyBannerByIds(String ids)
-    {
+    public int deletePolicyBannerByIds(String ids) {
         return this.delete(ids);
     }
 
@@ -92,8 +86,7 @@ public class PolicyBannerServiceImpl extends IBaseServiceImpl<PolicyBanner> impl
      * @return 结果
      */
     @Override
-    public int deletePolicyBannerById(Long id)
-    {
+    public int deletePolicyBannerById(Long id) {
         return this.delete(id);
     }
 }

@@ -19,33 +19,46 @@ import java.util.Date;
  */
 @Data
 @Table(name = "ics_policy")
-public class Policy extends BaseEntity<Policy>
-{
+public class Policy extends BaseEntity<Policy> {
     private static final long serialVersionUID = 1L;
 
-    /** 政策ID */
+    /**
+     * 政策ID
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /** 政策名称 */
+    /**
+     * 政策名称
+     */
     @NotBlank(message = "政策名称不能为空")
     @Length(max = 50, message = "名称不能超过50个字符")
     private String name;
 
-    /** 上传详情 */
+    /**
+     * 上传详情
+     */
     private String content;
 
-    /** 是否上架 */
+    /**
+     * 是否上架
+     */
     private Boolean isMarketable;
 
-    /** 删除标志（0代表存在 1代表删除） */
+    /**
+     * 删除标志（0代表存在 1代表删除）
+     */
     private Boolean delFlag;
 
-    /** 园区id */
+    /**
+     * 园区id
+     */
     private Long parkId;
 
-    /** 上架时间 */
+    /**
+     * 上架时间
+     */
     private Date marketableTime;
 
 

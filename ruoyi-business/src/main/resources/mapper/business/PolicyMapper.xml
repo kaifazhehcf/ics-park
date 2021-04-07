@@ -5,29 +5,40 @@
 <mapper namespace="com.ruoyi.business.mapper.PolicyMapper">
 
     <resultMap type="com.ruoyi.business.domain.Policy" id="PolicyResult">
-        <result property="id"    column="id"    />
-        <result property="name"    column="name"    />
-        <result property="content"    column="content"    />
-        <result property="isMarketable"    column="is_marketable"    />
-        <result property="delFlag"    column="del_flag"    />
-        <result property="parkId"    column="park_id"    />
-        <result property="createBy"    column="create_by"    />
-        <result property="updateBy"    column="update_by"    />
-        <result property="marketableTime"    column="marketable_time"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="updateTime"    column="update_time"    />
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="content" column="content"/>
+        <result property="isMarketable" column="is_marketable"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="parkId" column="park_id"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="marketableTime" column="marketable_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
     </resultMap>
 
     <sql id="selectPolicyVo">
-        select id, name, content, is_marketable, del_flag, park_id, marketable_time, create_by, update_by, create_time, update_time from ics_policy
+        select id,
+               name,
+               content,
+               is_marketable,
+               del_flag,
+               park_id,
+               marketable_time,
+               create_by,
+               update_by,
+               create_time,
+               update_time
+        from ics_policy
     </sql>
 
     <select id="selectPolicyList" parameterType="com.ruoyi.business.domain.Policy" resultMap="PolicyResult">
         <include refid="selectPolicyVo"/>
         <where>
-            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="parkId != null"> and park_id = #{parkId}</if>
-            <if test="isMarketable != null"> and is_marketable = #{isMarketable}</if>
+            <if test="name != null  and name != ''">and name like concat('%', #{name}, '%')</if>
+            <if test="parkId != null">and park_id = #{parkId}</if>
+            <if test="isMarketable != null">and is_marketable = #{isMarketable}</if>
         </where>
         ORDER BY create_time DESC
     </select>

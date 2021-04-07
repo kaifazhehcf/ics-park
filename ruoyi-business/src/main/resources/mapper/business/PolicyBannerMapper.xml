@@ -5,32 +5,47 @@
 <mapper namespace="com.ruoyi.business.mapper.PolicyBannerMapper">
 
     <resultMap type="com.ruoyi.business.domain.PolicyBanner" id="PolicyBannerResult">
-        <result property="id"    column="id"    />
-        <result property="name"    column="name"    />
-        <result property="bannerDesc"    column="banner_desc"    />
-        <result property="hits"    column="hits"    />
-        <result property="isMarketable"    column="is_marketable"    />
-        <result property="delFlag"    column="del_flag"    />
-        <result property="parkId"    column="park_id"    />
-        <result property="marketableTime"    column="marketable_time"    />
-        <result property="uri"    column="uri"    />
-        <result property="bannerImg"    column="banner_img"    />
-        <result property="createBy"    column="create_by"    />
-        <result property="updateBy"    column="update_by"    />
-        <result property="createTime"    column="create_time"    />
-        <result property="updateTime"    column="update_time"    />
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="bannerDesc" column="banner_desc"/>
+        <result property="hits" column="hits"/>
+        <result property="isMarketable" column="is_marketable"/>
+        <result property="delFlag" column="del_flag"/>
+        <result property="parkId" column="park_id"/>
+        <result property="marketableTime" column="marketable_time"/>
+        <result property="uri" column="uri"/>
+        <result property="bannerImg" column="banner_img"/>
+        <result property="createBy" column="create_by"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
     </resultMap>
 
     <sql id="selectPolicyBannerVo">
-        select id, name, banner_desc, hits, is_marketable, del_flag, park_id, marketable_time, uri, banner_img, create_by, update_by, create_time, update_time from ics_policy_banner
+        select id,
+               name,
+               banner_desc,
+               hits,
+               is_marketable,
+               del_flag,
+               park_id,
+               marketable_time,
+               uri,
+               banner_img,
+               create_by,
+               update_by,
+               create_time,
+               update_time
+        from ics_policy_banner
     </sql>
 
-    <select id="selectPolicyBannerList" parameterType="com.ruoyi.business.domain.PolicyBanner" resultMap="PolicyBannerResult">
+    <select id="selectPolicyBannerList" parameterType="com.ruoyi.business.domain.PolicyBanner"
+            resultMap="PolicyBannerResult">
         <include refid="selectPolicyBannerVo"/>
         <where>
-            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
-            <if test="parkId != null"> and park_id = #{parkId}</if>
-            <if test="isMarketable != null"> and is_marketable = #{isMarketable}</if>
+            <if test="name != null  and name != ''">and name like concat('%', #{name}, '%')</if>
+            <if test="parkId != null">and park_id = #{parkId}</if>
+            <if test="isMarketable != null">and is_marketable = #{isMarketable}</if>
         </where>
     </select>
 

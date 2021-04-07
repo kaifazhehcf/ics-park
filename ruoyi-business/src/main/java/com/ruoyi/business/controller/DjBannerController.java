@@ -1,13 +1,10 @@
 package com.ruoyi.business.controller;
 
-import com.google.common.collect.Maps;
 import com.ruoyi.business.domain.DjBanner;
 import com.ruoyi.business.service.IDjBannerService;
 import com.ruoyi.common.redis.util.RedisUtils;
 import com.ruoyi.common.utils.DateUtils;
-import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.ValidatorUtils;
-import org.apache.commons.compress.utils.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,9 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ruoyi.common.core.domain.R;
 import com.ruoyi.common.core.controller.BaseController;
 
-import java.util.List;
-import java.util.Map;
-
 
 /**
  * 党建banner 提供者
@@ -31,8 +25,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/business/djBanner")
-public class DjBannerController extends BaseController
-{
+public class DjBannerController extends BaseController {
 
     @Autowired
     private IDjBannerService djBannerService;
@@ -44,8 +37,7 @@ public class DjBannerController extends BaseController
      * 查询${tableComment}
      */
     @GetMapping("get/{id}")
-    public DjBanner get(@PathVariable("id") Long id)
-    {
+    public DjBanner get(@PathVariable("id") Long id) {
         return djBannerService.selectDjBannerById(id);
 
     }
@@ -54,12 +46,11 @@ public class DjBannerController extends BaseController
      * 查询党建banner列表
      */
     @GetMapping("list")
-    public R list(DjBanner djBanner)
-    {
+    public R list(DjBanner djBanner) {
         startPage();
         djBanner.setParkId(getParkId());
         // 默认点击量为0
-        djBanner.setHits(0l);
+        djBanner.setHits(0);
         return result(djBannerService.selectDjBannerList(djBanner));
     }
 
@@ -68,14 +59,13 @@ public class DjBannerController extends BaseController
      * 新增保存党建banner
      */
     @PostMapping("save")
-    public R addSave(@RequestBody DjBanner djBanner)
-    {
+    public R addSave(@RequestBody DjBanner djBanner) {
         ValidatorUtils.validateEntity(djBanner);
         djBanner.setDelFlag(false);
         djBanner.setParkId(getParkId());
         djBanner.setCreateBy(getLoginName());
         djBanner.setIsMarketable(false);
-        djBanner.setHits(0L);
+        djBanner.setHits(0);
         return toAjax(djBannerService.insertDjBanner(djBanner));
     }
 
@@ -83,8 +73,7 @@ public class DjBannerController extends BaseController
      * 修改保存党建banner
      */
     @PostMapping("update")
-    public R editSave(@RequestBody DjBanner djBanner)
-    {
+    public R editSave(@RequestBody DjBanner djBanner) {
         ValidatorUtils.validateEntity(djBanner);
         djBanner.setUpdateBy(getLoginName());
         return toAjax(djBannerService.updateDjBanner(djBanner));
@@ -94,8 +83,7 @@ public class DjBannerController extends BaseController
      * 删除${tableComment}
      */
     @PostMapping("remove")
-    public R remove(String ids)
-    {
+    public R remove(String ids) {
         return toAjax(djBannerService.deleteDjBannerByIds(ids));
     }
 

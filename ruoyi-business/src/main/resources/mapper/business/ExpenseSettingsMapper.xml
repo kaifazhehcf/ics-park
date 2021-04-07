@@ -20,7 +20,19 @@
     </resultMap>
 
     <sql id="selectExpenseSettingsVo">
-        SELECT id, name, type, units_code, tax_fee, memo, park_id, create_by, update_by, create_time, update_time ,is_enabled FROM ics_expense_settings
+        SELECT id,
+               name,
+               type,
+               units_code,
+               tax_fee,
+               memo,
+               park_id,
+               create_by,
+               update_by,
+               create_time,
+               update_time,
+               is_enabled
+        FROM ics_expense_settings
     </sql>
 
     <select id="selectExpenseSettingsList" parameterType="ExpenseSettings" resultMap="ExpenseSettingsResult">

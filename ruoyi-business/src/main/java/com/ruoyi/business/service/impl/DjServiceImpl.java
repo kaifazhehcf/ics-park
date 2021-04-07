@@ -18,8 +18,7 @@ import org.springframework.stereotype.Service;
  * @date 2020-10-27
  */
 @Service
-public class DjServiceImpl extends IBaseServiceImpl<Dj> implements IDjService
-{
+public class DjServiceImpl extends IBaseServiceImpl<Dj> implements IDjService {
     @Autowired
     private DjMapper djMapper;
 
@@ -30,8 +29,7 @@ public class DjServiceImpl extends IBaseServiceImpl<Dj> implements IDjService
      * @return 党建管理
      */
     @Override
-    public Dj selectDjById(Long id)
-    {
+    public Dj selectDjById(Long id) {
         return djMapper.selectDjById(id);
     }
 
@@ -42,8 +40,7 @@ public class DjServiceImpl extends IBaseServiceImpl<Dj> implements IDjService
      * @return 党建管理
      */
     @Override
-    public List<Dj> selectDjList(Dj dj)
-    {
+    public List<Dj> selectDjList(Dj dj) {
         return djMapper.selectDjList(dj);
     }
 
@@ -54,8 +51,7 @@ public class DjServiceImpl extends IBaseServiceImpl<Dj> implements IDjService
      * @return 结果
      */
     @Override
-    public int insertDj(Dj dj)
-    {
+    public int insertDj(Dj dj) {
         dj.setCreateTime(DateUtils.getNowDate());
         return this.save(dj);
     }
@@ -67,8 +63,7 @@ public class DjServiceImpl extends IBaseServiceImpl<Dj> implements IDjService
      * @return 结果
      */
     @Override
-    public int updateDj(Dj dj)
-    {
+    public int updateDj(Dj dj) {
         dj.setUpdateTime(DateUtils.getNowDate());
         return this.update(dj);
     }
@@ -80,8 +75,7 @@ public class DjServiceImpl extends IBaseServiceImpl<Dj> implements IDjService
      * @return 结果
      */
     @Override
-    public int deleteDjByIds(String ids)
-    {
+    public int deleteDjByIds(String ids) {
         return this.delete(ids);
     }
 
@@ -92,8 +86,7 @@ public class DjServiceImpl extends IBaseServiceImpl<Dj> implements IDjService
      * @return 结果
      */
     @Override
-    public int deleteDjById(Long id)
-    {
+    public int deleteDjById(Long id) {
         return this.delete(id);
     }
 }

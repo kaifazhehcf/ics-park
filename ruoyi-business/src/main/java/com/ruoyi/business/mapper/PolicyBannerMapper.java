@@ -3,6 +3,7 @@ package com.ruoyi.business.mapper;
 import com.ruoyi.business.domain.PolicyBanner;
 import com.ruoyi.common.core.dao.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+
 import java.util.List;
 
 /**
@@ -12,8 +13,7 @@ import java.util.List;
  * @date 2020-10-29
  */
 @Mapper
-public interface PolicyBannerMapper extends BaseMapper<PolicyBanner>
-{
+public interface PolicyBannerMapper extends BaseMapper<PolicyBanner> {
     /**
      * 查询政策banner
      *

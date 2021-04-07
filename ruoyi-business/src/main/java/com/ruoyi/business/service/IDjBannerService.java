@@ -11,8 +11,7 @@ import java.util.List;
  * @author zzm
  * @date 2020-10-27
  */
-public interface IDjBannerService extends IBaseService<DjBanner>
-{
+public interface IDjBannerService extends IBaseService<DjBanner> {
     /**
      * 查询党建banner
      *

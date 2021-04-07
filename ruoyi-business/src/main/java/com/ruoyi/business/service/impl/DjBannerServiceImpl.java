@@ -17,8 +17,7 @@ import org.springframework.stereotype.Service;
  * @date 2020-10-27
  */
 @Service
-public class DjBannerServiceImpl extends IBaseServiceImpl<DjBanner> implements IDjBannerService
-{
+public class DjBannerServiceImpl extends IBaseServiceImpl<DjBanner> implements IDjBannerService {
     @Autowired
     private DjBannerMapper djBannerMapper;
 
@@ -29,8 +28,7 @@ public class DjBannerServiceImpl extends IBaseServiceImpl<DjBanner> implements I
      * @return 党建banner
      */
     @Override
-    public DjBanner selectDjBannerById(Long id)
-    {
+    public DjBanner selectDjBannerById(Long id) {
         return djBannerMapper.selectDjBannerById(id);
     }
 
@@ -41,8 +39,7 @@ public class DjBannerServiceImpl extends IBaseServiceImpl<DjBanner> implements I
      * @return 党建banner
      */
     @Override
-    public List<DjBanner> selectDjBannerList(DjBanner djBanner)
-    {
+    public List<DjBanner> selectDjBannerList(DjBanner djBanner) {
         return djBannerMapper.selectDjBannerList(djBanner);
     }
 
@@ -53,8 +50,7 @@ public class DjBannerServiceImpl extends IBaseServiceImpl<DjBanner> implements I
      * @return 结果
      */
     @Override
-    public int insertDjBanner(DjBanner djBanner)
-    {
+    public int insertDjBanner(DjBanner djBanner) {
         djBanner.setCreateTime(DateUtils.getNowDate());
         return this.save(djBanner);
     }
@@ -66,8 +62,7 @@ public class DjBannerServiceImpl extends IBaseServiceImpl<DjBanner> implements I
      * @return 结果
      */
     @Override
-    public int updateDjBanner(DjBanner djBanner)
-    {
+    public int updateDjBanner(DjBanner djBanner) {
         djBanner.setUpdateTime(DateUtils.getNowDate());
         return this.update(djBanner);
     }
@@ -79,8 +74,7 @@ public class DjBannerServiceImpl extends IBaseServiceImpl<DjBanner> implements I
      * @return 结果
      */
     @Override
-    public int deleteDjBannerByIds(String ids)
-    {
+    public int deleteDjBannerByIds(String ids) {
         return this.delete(ids);
     }
 
@@ -91,8 +85,7 @@ public class DjBannerServiceImpl extends IBaseServiceImpl<DjBanner> implements I
      * @return 结果
      */
     @Override
-    public int deleteDjBannerById(Long id)
-    {
+    public int deleteDjBannerById(Long id) {
         return this.delete(id);
     }
 }

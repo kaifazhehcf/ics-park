@@ -2,7 +2,6 @@ package com.ruoyi.business.controller;
 
 import com.ruoyi.business.domain.PolicyBanner;
 import com.ruoyi.business.service.IPolicyBannerService;
-import com.ruoyi.common.redis.util.RedisUtils;
 import com.ruoyi.common.utils.DateUtils;
 import com.ruoyi.common.utils.ValidatorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +24,7 @@ import com.ruoyi.common.core.controller.BaseController;
  */
 @RestController
 @RequestMapping("/business/policyBanner")
-public class PolicyBannerController extends BaseController
-{
+public class PolicyBannerController extends BaseController {
 
     @Autowired
     private IPolicyBannerService policyBannerService;
@@ -35,8 +33,7 @@ public class PolicyBannerController extends BaseController
      * 查询${tableComment}
      */
     @GetMapping("get/{id}")
-    public PolicyBanner get(@PathVariable("id") Long id)
-    {
+    public PolicyBanner get(@PathVariable("id") Long id) {
         return policyBannerService.selectPolicyBannerById(id);
 
     }
@@ -45,8 +42,7 @@ public class PolicyBannerController extends BaseController
      * 查询政策banner列表
      */
     @GetMapping("list")
-    public R list(PolicyBanner policyBanner)
-    {
+    public R list(PolicyBanner policyBanner) {
         startPage();
         policyBanner.setParkId(getParkId());
         // 默认点击量为0
@@ -55,13 +51,11 @@ public class PolicyBannerController extends BaseController
     }
 
 
-
     /**
      * 新增保存政策banner
      */
     @PostMapping("save")
-    public R addSave(@RequestBody PolicyBanner policyBanner)
-    {
+    public R addSave(@RequestBody PolicyBanner policyBanner) {
         ValidatorUtils.validateEntity(policyBanner);
         policyBanner.setDelFlag(false);
         policyBanner.setParkId(getParkId());
@@ -75,8 +69,7 @@ public class PolicyBannerController extends BaseController
      * 修改保存政策banner
      */
     @PostMapping("update")
-    public R editSave(@RequestBody PolicyBanner policyBanner)
-    {
+    public R editSave(@RequestBody PolicyBanner policyBanner) {
         ValidatorUtils.validateEntity(policyBanner);
         policyBanner.setUpdateBy(getLoginName());
         return toAjax(policyBannerService.updatePolicyBanner(policyBanner));
@@ -86,8 +79,7 @@ public class PolicyBannerController extends BaseController
      * 删除${tableComment}
      */
     @PostMapping("remove")
-    public R remove(String ids)
-    {
+    public R remove(String ids) {
         return toAjax(policyBannerService.deletePolicyBannerByIds(ids));
     }
 

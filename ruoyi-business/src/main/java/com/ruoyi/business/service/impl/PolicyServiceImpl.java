@@ -18,8 +18,7 @@ import org.springframework.stereotype.Service;
  * @date 2020-10-29
  */
 @Service
-public class PolicyServiceImpl extends IBaseServiceImpl<Policy> implements IPolicyService
-{
+public class PolicyServiceImpl extends IBaseServiceImpl<Policy> implements IPolicyService {
     @Autowired
     private PolicyMapper policyMapper;
 
@@ -30,8 +29,7 @@ public class PolicyServiceImpl extends IBaseServiceImpl<Policy> implements IPoli
      * @return 政策管理
      */
     @Override
-    public Policy selectPolicyById(Long id)
-    {
+    public Policy selectPolicyById(Long id) {
         return policyMapper.selectPolicyById(id);
     }
 
@@ -42,8 +40,7 @@ public class PolicyServiceImpl extends IBaseServiceImpl<Policy> implements IPoli
      * @return 政策管理
      */
     @Override
-    public List<Policy> selectPolicyList(Policy policy)
-    {
+    public List<Policy> selectPolicyList(Policy policy) {
         return policyMapper.selectPolicyList(policy);
     }
 
@@ -54,8 +51,7 @@ public class PolicyServiceImpl extends IBaseServiceImpl<Policy> implements IPoli
      * @return 结果
      */
     @Override
-    public int insertPolicy(Policy policy)
-    {
+    public int insertPolicy(Policy policy) {
         policy.setCreateTime(DateUtils.getNowDate());
         return this.save(policy);
     }
@@ -67,8 +63,7 @@ public class PolicyServiceImpl extends IBaseServiceImpl<Policy> implements IPoli
      * @return 结果
      */
     @Override
-    public int updatePolicy(Policy policy)
-    {
+    public int updatePolicy(Policy policy) {
         policy.setUpdateTime(DateUtils.getNowDate());
         return this.update(policy);
     }
@@ -80,8 +75,7 @@ public class PolicyServiceImpl extends IBaseServiceImpl<Policy> implements IPoli
      * @return 结果
      */
     @Override
-    public int deletePolicyByIds(String ids)
-    {
+    public int deletePolicyByIds(String ids) {
         return this.delete(ids);
     }
 
@@ -92,8 +86,7 @@ public class PolicyServiceImpl extends IBaseServiceImpl<Policy> implements IPoli
      * @return 结果
      */
     @Override
-    public int deletePolicyById(Long id)
-    {
+    public int deletePolicyById(Long id) {
         return this.delete(id);
     }
 }
